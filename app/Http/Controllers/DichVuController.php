@@ -36,4 +36,16 @@ class DichVuController extends Controller
             'message'   =>  'Đã xoá dịch vụ thành công!'
         ]);
     }
+
+    public function update(Request $request)
+    {
+        $data   = $request->all();
+
+        DichVu::find($request->id)->update($data);
+
+        return response()->json([
+            'status'    =>  true,
+            'message'   =>  'Đã cập nhật dịch vụ thành công!'
+        ]);
+    }
 }

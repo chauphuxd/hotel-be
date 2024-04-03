@@ -16,3 +16,5 @@ Route::put('/loai-phong/update', [LoaiPhongController::class, 'update']);
 Route::get('/dich-vu/data', [DichVuController::class, 'getData']);
 Route::post('/dich-vu/create', [DichVuController::class, 'store']);
 Route::delete('/dich-vu/delete/{id}', [DichVuController::class, 'destroy']);
+Route::put('/dich-vu/update', [DichVuController::class, 'update']);
+
