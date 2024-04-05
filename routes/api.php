@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DichVuController;
 use App\Http\Controllers\LoaiPhongController;
+use App\Http\Controllers\PhongController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,4 +18,9 @@ Route::get('/dich-vu/data', [DichVuController::class, 'getData']);
 Route::post('/dich-vu/create', [DichVuController::class, 'store']);
 Route::delete('/dich-vu/delete/{id}', [DichVuController::class, 'destroy']);
 Route::put('/dich-vu/update', [DichVuController::class, 'update']);
+
+Route::get('/phong/data', [PhongController::class, 'getData']);
+Route::post('/phong/create', [PhongController::class, 'store']);
+Route::delete('/phong/delete/{id}', [PhongController::class, 'destroy']);
+Route::put('/phong/update', [PhongController::class, 'update']);
 
