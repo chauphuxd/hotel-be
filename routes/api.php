@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DichVuController;
 use App\Http\Controllers\LoaiPhongController;
+use App\Http\Controllers\NhanVienController;
 use App\Http\Controllers\PhongController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -11,7 +12,7 @@ Route::post('/loai-phong/create', [LoaiPhongController::class, 'store']);
 Route::delete('/loai-phong/delete/{id}', [LoaiPhongController::class, 'destroy']);
 Route::put('/loai-phong/update', [LoaiPhongController::class, 'update']);
 
-// 127.0.0.1:8000/api/loai-phong/data
+
 
 
 Route::get('/dich-vu/data', [DichVuController::class, 'getData']);
@@ -24,3 +25,8 @@ Route::post('/phong/create', [PhongController::class, 'store']);
 Route::delete('/phong/delete/{id}', [PhongController::class, 'destroy']);
 Route::put('/phong/update', [PhongController::class, 'update']);
 
+
+Route::get('/nhan-vien/data', [NhanVienController::class, 'getData']);
+Route::post('/nhan-vien/create', [NhanVienController::class, 'store']);
+Route::delete('/nhan-vien/delete/{id}', [NhanVienController::class, 'destroy']);
+Route::put('/nhan-vien/update', [NhanVienController::class, 'update']);
