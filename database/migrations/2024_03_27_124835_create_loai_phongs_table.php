@@ -12,6 +12,8 @@ return new class extends Migration
             $table->id();
             $table->string('ten_loai_phong');
             $table->string('so_giuong');
+            $table->integer('so_nguoi_lon');
+            $table->integer('so_tre_em');
             $table->integer('dien_tich');
             $table->string('hinh_anh');
             $table->integer('tinh_trang');

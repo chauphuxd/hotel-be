@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('ten_phong');
             $table->integer('gia_mac_dinh');
             $table->integer('tinh_trang');
-            $table->integer('nguoi_toi_da');
             $table->integer('id_loai_phong');
             $table->longText('tien_ich_khac')->nullable();
             $table->timestamps();

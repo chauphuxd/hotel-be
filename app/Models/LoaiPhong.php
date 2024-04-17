@@ -14,6 +14,8 @@ class LoaiPhong extends Model
     protected $fillable = [
         'ten_loai_phong',
         'so_giuong',
+        'so_nguoi_lon',
+        'so_tre_em',
         'dien_tich',
         'hinh_anh',
         'tinh_trang'

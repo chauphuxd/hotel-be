@@ -15,7 +15,6 @@ class Phong extends Model
         'ten_phong',
         'gia_mac_dinh',
         'tinh_trang',
-        'nguoi_toi_da',
         'id_loai_phong',
         'tien_ich_khac',
     ];
