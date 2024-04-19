@@ -23,5 +23,6 @@ class NhanVien extends Model
         'password',
         'tinh_trang',
         'avatar',
+        'is_master',
     ];
 }

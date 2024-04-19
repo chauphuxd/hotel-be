@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('password');
             $table->integer('tinh_trang');
             $table->string('avatar');
+            $table->integer('is_master')->default(0);
             $table->timestamps();
         });
     }

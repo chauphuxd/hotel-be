@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\ChucNangController;
 use App\Http\Controllers\DichVuController;
 use App\Http\Controllers\LoaiPhongController;
 use App\Http\Controllers\NhanVienController;
+use App\Http\Controllers\PhanQuyenController;
 use App\Http\Controllers\PhongController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SlideController;
@@ -13,9 +15,6 @@ Route::get('/loai-phong/data', [LoaiPhongController::class, 'getData']);
 Route::post('/loai-phong/create', [LoaiPhongController::class, 'store']);
 Route::delete('/loai-phong/delete/{id}', [LoaiPhongController::class, 'destroy']);
 Route::put('/loai-phong/update', [LoaiPhongController::class, 'update']);
-
-
-
 
 Route::get('/dich-vu/data', [DichVuController::class, 'getData']);
 Route::post('/dich-vu/create', [DichVuController::class, 'store']);
@@ -42,3 +41,10 @@ Route::get('/review/data', [ReviewController::class, 'getData']);
 Route::post('/review/create', [ReviewController::class, 'store']);
 Route::delete('/review/delete/{id}', [ReviewController::class, 'destroy']);
 Route::put('/review/update', [ReviewController::class, 'update']);
+
+Route::get('/phan-quyen/data', [PhanQuyenController::class, 'getData']);
+Route::post('/phan-quyen/create', [PhanQuyenController::class, 'createData']);
+Route::delete('/phan-quyen/delete/{id}', [PhanQuyenController::class, 'deleteData']);
+Route::put('/phan-quyen/update', [PhanQuyenController::class, 'UpateData']);
+
+Route::get('/chuc-nang/data', [ChucNangController::class, 'getData']);
