@@ -18,6 +18,7 @@ class LoaiPhong extends Model
         'so_tre_em',
         'dien_tich',
         'hinh_anh',
+        'tien_ich',
         'tinh_trang'
     ];
 }

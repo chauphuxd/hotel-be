@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('so_tre_em');
             $table->integer('dien_tich');
             $table->string('hinh_anh');
+            $table->longText('tien_ich');
             $table->integer('tinh_trang');
             $table->timestamps();
         });
