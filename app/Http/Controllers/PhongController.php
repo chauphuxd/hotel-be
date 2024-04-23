@@ -9,7 +9,9 @@ class PhongController extends Controller
 {
     public function getData()
     {
-        $data   =   Phong::all();
+        $data   =   Phong::join('loai_phongs', 'phongs.id_loai_phong', 'loai_phongs.id')
+                         ->select('phongs.*', 'loai_phongs.ten_loai_phong')
+                         ->get();
 
         return response()->json([
             'phong'  =>  $data

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChiTietThuePhongController;
 use App\Http\Controllers\ChucNangController;
 use App\Http\Controllers\DichVuController;
 use App\Http\Controllers\LoaiPhongController;
@@ -48,3 +49,5 @@ Route::delete('/phan-quyen/delete/{id}', [PhanQuyenController::class, 'deleteDat
 Route::put('/phan-quyen/update', [PhanQuyenController::class, 'UpateData']);
 
 Route::get('/chuc-nang/data', [ChucNangController::class, 'getData']);
+
+Route::post('/chi-tiet-thue-phong/create', [ChiTietThuePhongController::class, 'createData']);
