@@ -51,3 +51,6 @@ Route::put('/phan-quyen/update', [PhanQuyenController::class, 'UpateData']);
 Route::get('/chuc-nang/data', [ChucNangController::class, 'getData']);
 
 Route::post('/chi-tiet-thue-phong/create', [ChiTietThuePhongController::class, 'createData']);
+Route::get('/chi-tiet-thue-phong/data', [ChiTietThuePhongController::class, 'getData']);
+Route::put('/chi-tiet-thue-phong/update', [ChiTietThuePhongController::class, 'UpdateData']);
+

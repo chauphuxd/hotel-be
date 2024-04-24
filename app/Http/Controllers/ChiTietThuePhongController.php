@@ -35,4 +35,24 @@ class ChiTietThuePhongController extends Controller
             'message'   =>  'Đã tạo chi tiết phòng thành công!',
         ]);
     }
+    public function getData()
+    {
+
+        $data = ChiTietThuePhong::get();
+        return response()->json([
+            'data' => $data
+        ]);
+    }
+    public function UpdateData(Request $request)
+    {
+        $data   = $request->all();
+
+        ChiTietThuePhong::find($request->id)->update($data);
+
+        return response()->json([
+            'status'    =>  true,
+            'message'   =>  'Đã cập nhật phòng thành công!'
+        ]);
+    }
+
 }
