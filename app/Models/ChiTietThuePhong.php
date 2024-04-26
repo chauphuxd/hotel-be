@@ -19,4 +19,9 @@ class ChiTietThuePhong extends Model
         'id_hoa_don',
         'ghi_chu',
     ];
+
+    CONST PHONG_DANG_SUA  = 0;
+    CONST PHONG_TRONG     = 1;
+    CONST PHONG_DANG_COC  = 2;
+    CONST PHONG_CO_NGUOI  = 3;
 }
