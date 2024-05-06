@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BaiVietController;
 use App\Http\Controllers\ChiTietThuePhongController;
 use App\Http\Controllers\ChucNangController;
 use App\Http\Controllers\DichVuController;
@@ -55,5 +56,3 @@ Route::get('/chi-tiet-thue-phong/data', [ChiTietThuePhongController::class, 'get
 Route::put('/chi-tiet-thue-phong/update', [ChiTietThuePhongController::class, 'UpdateData']);
 
 Route::get('/data', [ChiTietThuePhongController::class, 'data']);
-
-
