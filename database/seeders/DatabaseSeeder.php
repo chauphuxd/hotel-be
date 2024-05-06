@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             ReviewSeeder::class,
             ChucNangSeeder::class,
             NhanVienSeeder::class,
+            BaiVietSeeder::class,
         ]);
     }
 }
