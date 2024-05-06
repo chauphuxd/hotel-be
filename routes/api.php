@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BaiVietController;
 use App\Http\Controllers\ChiTietThuePhongController;
 use App\Http\Controllers\ChucNangController;
 use App\Http\Controllers\DichVuController;
@@ -57,3 +58,7 @@ Route::put('/chi-tiet-thue-phong/update', [ChiTietThuePhongController::class, 'U
 Route::get('/data', [ChiTietThuePhongController::class, 'data']);
 
 
+Route::get('/bai-viet/data', [BaiVietController::class, 'getData']);
+Route::post('/bai-viet/create', [BaiVietController::class, 'store']);
+Route::delete('/bai-viet/delete/{id}', [BaiVietController::class, 'destroy']);
+Route::put('/bai-viet/update', [BaiVietController::class, 'update']);
