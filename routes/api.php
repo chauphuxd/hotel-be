@@ -4,6 +4,7 @@ use App\Http\Controllers\BaiVietController;
 use App\Http\Controllers\ChiTietThuePhongController;
 use App\Http\Controllers\ChucNangController;
 use App\Http\Controllers\DichVuController;
+use App\Http\Controllers\KhachHangController;
 use App\Http\Controllers\LoaiPhongController;
 use App\Http\Controllers\NhanVienController;
 use App\Http\Controllers\PhanQuyenController;
@@ -62,3 +63,7 @@ Route::get('/bai-viet/data', [BaiVietController::class, 'getData']);
 Route::post('/bai-viet/create', [BaiVietController::class, 'store']);
 Route::delete('/bai-viet/delete/{id}', [BaiVietController::class, 'destroy']);
 Route::put('/bai-viet/update', [BaiVietController::class, 'update']);
+
+Route::get('/khach-hang/data', [KhachHangController::class, 'getData']);
+Route::put('/khach-hang/doi-trang-thai', [KhachHangController::class, 'doiTrangThai']);
+Route::post('/dang-ky', [KhachHangController::class, 'dangKy']);

@@ -9,7 +9,6 @@ class BaiVietController extends Controller
 {
     public function getData()
     {
-        // MID PUSH LAI
         $data = BaiViet::all();
         return response()->json([
             'bai_viet'  =>  $data
