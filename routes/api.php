@@ -63,7 +63,10 @@ Route::get('/bai-viet/data', [BaiVietController::class, 'getData']);
 Route::post('/bai-viet/create', [BaiVietController::class, 'store']);
 Route::delete('/bai-viet/delete/{id}', [BaiVietController::class, 'destroy']);
 Route::put('/bai-viet/update', [BaiVietController::class, 'update']);
+Route::put('/bai-viet/doi-trang-thai', [BaiVietController::class, 'doiTrangThai']);
 
 Route::get('/khach-hang/data', [KhachHangController::class, 'getData']);
 Route::put('/khach-hang/doi-trang-thai', [KhachHangController::class, 'doiTrangThai']);
+Route::delete('/khach-hang/delete/{id}', [KhachHangController::class, 'destroy']);
+Route::put('/khach-hang/update', [KhachHangController::class, 'update']);
 Route::post('/dang-ky', [KhachHangController::class, 'dangKy']);

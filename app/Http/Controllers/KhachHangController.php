@@ -64,4 +64,26 @@ class KhachHangController extends Controller
             ]);
         }
     }
+
+    public function destroy($id)
+    {
+        KhachHang::find($id)->delete();
+
+        return response()->json([
+            'status'    =>  true,
+            'message'   =>  'Đã xoá khách hàng thành công!'
+        ]);
+    }
+
+    public function update(Request $request)
+    {
+        $data   = $request->all();
+        // return response()->json($data);
+        KhachHang::find($request->id)->update($data);
+
+        return response()->json([
+            'status'    =>  true,
+            'message'   =>  'Đã cập nhật khách hàng thành công!'
+        ]);
+    }
 }

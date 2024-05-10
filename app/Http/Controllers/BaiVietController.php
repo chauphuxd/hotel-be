@@ -45,4 +45,27 @@ class BaiVietController extends Controller
             'message'   =>  'Đã cập nhật bài viết thành công!'
         ]);
     }
+
+    public function doiTrangThai(Request $request)
+    {
+        $bai_viet = BaiViet::find($request->id);
+        if($bai_viet) {
+            if($bai_viet->tinh_trang == 1) {
+                $bai_viet->tinh_trang = 0;
+            } else {
+                $bai_viet->tinh_trang = 1;
+            }
+            $bai_viet->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => "Đổi trạng thái bài viết thành công!"
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => "Đã có lỗi xảy ra!"
+            ]);
+        }
+    }
 }
