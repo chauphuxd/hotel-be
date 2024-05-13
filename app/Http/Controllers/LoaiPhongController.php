@@ -49,4 +49,26 @@ class LoaiPhongController extends Controller
             'message'   =>  'Đã cập nhật loại phòng thành công!'
         ]);
     }
+    public function doiTrangThai(Request $request)
+    {
+        $loai_phong = LoaiPhong::find($request->id);
+        if($loai_phong) {
+            if($loai_phong->tinh_trang == 1) {
+                $loai_phong->tinh_trang = 0;
+            } else {
+                $loai_phong->tinh_trang = 1;
+            }
+            $loai_phong->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => "Đổi trạng thái loại phòng thành công!"
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => "Đã có lỗi xảy ra!"
+            ]);
+        }
+    }
 }

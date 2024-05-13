@@ -50,4 +50,26 @@ class PhongController extends Controller
             'message'   =>  'Đã cập nhật phòng thành công!'
         ]);
     }
+    public function doiTrangThai(Request $request)
+    {
+        $phong = Phong::find($request->id);
+        if($phong) {
+            if($phong->tinh_trang == 1) {
+                $phong->tinh_trang = 0;
+            } else {
+                $phong->tinh_trang = 1;
+            }
+            $phong->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => "Đổi trạng thái phòng thành công!"
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => "Đã có lỗi xảy ra!"
+            ]);
+        }
+    }
 }

@@ -48,4 +48,26 @@ class DichVuController extends Controller
             'message'   =>  'Đã cập nhật dịch vụ thành công!'
         ]);
     }
+    public function doiTrangThai(Request $request)
+    {
+        $dich_vu = DichVu::find($request->id);
+        if($dich_vu) {
+            if($dich_vu->tinh_trang == 1) {
+                $dich_vu->tinh_trang = 0;
+            } else {
+                $dich_vu->tinh_trang = 1;
+            }
+            $dich_vu->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => "Đổi trạng thái dịch vụ thành công!"
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => "Đã có lỗi xảy ra!"
+            ]);
+        }
+    }
 }

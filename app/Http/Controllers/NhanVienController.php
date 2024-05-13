@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\NhanVien;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NhanVienController extends Controller
 {
@@ -17,9 +18,12 @@ class NhanVienController extends Controller
     }
     public function store(Request $request)
     {
-        $data   =   $request->all();
-        NhanVien::create($data);
 
+        $data   =   $request->all();
+
+        $data['password'] = bcrypt($request->password);
+
+        NhanVien::create($data);
         return response()->json([
             'status'    =>  true,
             'message'   =>  'Đã tạo mới nhân viên thành công!'
@@ -46,5 +50,49 @@ class NhanVienController extends Controller
             'status'    =>  true,
             'message'   =>  'Đã cập nhật nhân viên thành công!'
         ]);
+    }
+
+    public function dangNhap(Request $request){
+
+        // $check = NhanVien::where('email',$request->email)
+        //                   ->where('password',$request->password)
+        //                   ->first();
+        $check  = Auth::guard('nhan_vien')->attempt(['email'=> $request->email,'password'=>  $request->password]);
+
+            if($check){
+                $user =  Auth::guard('nhan_vien')->user();
+                return response()->json([
+                    'status'    =>  true,
+                    'token'     => $user->createToken('token')->plainTextToken,
+                    'message'   =>  'Đã đăng nhập thành công'
+                ]);
+            }else{
+                return response()->json([
+                    'status'    =>  false,
+                    'message'   =>  'Tài Khoản hoặc mật khẩu không đúng'
+                ]);
+            }
+    }
+    public function doiTrangThai(Request $request)
+    {
+        $nhan_vien = NhanVien::find($request->id);
+        if($nhan_vien) {
+            if($nhan_vien->tinh_trang == 1) {
+                $nhan_vien->tinh_trang = 0;
+            } else {
+                $nhan_vien->tinh_trang = 1;
+            }
+            $nhan_vien->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => "Đổi trạng thái nhân viên thành công!"
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => "Đã có lỗi xảy ra!"
+            ]);
+        }
     }
 }

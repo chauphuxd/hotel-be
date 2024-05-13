@@ -48,4 +48,26 @@ class SlideController extends Controller
             'message'   =>  'Đã cập nhật slide thành công!'
         ]);
     }
+    public function doiTrangThai(Request $request)
+    {
+        $slide = Slide::find($request->id);
+        if($slide) {
+            if($slide->tinh_trang == 1) {
+                $slide->tinh_trang = 0;
+            } else {
+                $slide->tinh_trang = 1;
+            }
+            $slide->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => "Đổi trạng thái slide thành công!"
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => "Đã có lỗi xảy ra!"
+            ]);
+        }
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\KhachHang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KhachHangController extends Controller
 {
@@ -18,7 +19,11 @@ class KhachHangController extends Controller
                 'message' => "Email đã tồn tại trong hệ thống!"
             ]);
         } else {
-            KhachHang::create($request->all());
+            
+            $data   =   $request->all();
+            $data['password'] = bcrypt($request->password);
+    
+            KhachHang::create($data);
 
             return response()->json([
                 'status' => true,
@@ -85,5 +90,26 @@ class KhachHangController extends Controller
             'status'    =>  true,
             'message'   =>  'Đã cập nhật khách hàng thành công!'
         ]);
+    }
+    public function dangNhap(Request $request){
+
+        // $check = NhanVien::where('email',$request->email)
+        //                   ->where('password',$request->password)
+        //                   ->first();
+        $check  = Auth::guard('khach_hang')->attempt(['email'=> $request->email,'password'=>  $request->password]);
+
+            if($check){
+                $user =  Auth::guard('khach_hang')->user();
+                return response()->json([
+                    'status'    =>  true,
+                    'token'     => $user->createToken('token')->plainTextToken,
+                    'message'   =>  'Đã đăng nhập thành công'
+                ]);
+            }else{
+                return response()->json([
+                    'status'    =>  false,
+                    'message'   =>  'Tài Khoản hoặc mật khẩu không đúng'
+                ]);
+            }
     }
 }
