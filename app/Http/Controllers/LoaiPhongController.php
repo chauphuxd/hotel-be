@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\LoaiPhong;
 use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoaiPhongController extends Controller
 {
@@ -13,6 +14,7 @@ class LoaiPhongController extends Controller
         $data   =   LoaiPhong::all();
 
         return response()->json([
+            'status'      =>  true,
             'loai_phong'  =>  $data
         ]);
     }
