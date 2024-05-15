@@ -80,10 +80,7 @@ Route::group([], function() {
     Route::delete('/khach-hang/delete/{id}', [KhachHangController::class, 'destroy']);
     Route::put('/khach-hang/update', [KhachHangController::class, 'update']);
     Route::post('/dang-ky', [KhachHangController::class, 'dangKy']);
-})->middleware(kiemTraAdminMiddleware::class);
-
-
-
+})->middleware("adminMiddle");
 
 Route::post('/admin/dang-nhap', [NhanVienController::class, 'dangNhap']);
 Route::post('/khach-hang/dang-nhap', [KhachHangController::class, 'dangNhap']);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ThemMoiNhanVienRequest;
 use App\Models\NhanVien;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +17,9 @@ class NhanVienController extends Controller
             'nhan_vien'  =>  $data
         ]);
     }
-    public function store(Request $request)
-    {
 
+    public function store(ThemMoiNhanVienRequest $request)
+    {
         $data   =   $request->all();
 
         $data['password'] = bcrypt($request->password);
