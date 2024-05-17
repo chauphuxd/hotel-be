@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\createDichVuRequest;
 use App\Models\DichVu;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,7 @@ class DichVuController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(createDichVuRequest $request)
     {
         $data   =   $request->all();
         DichVu::create($data);

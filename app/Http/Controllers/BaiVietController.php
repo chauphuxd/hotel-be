@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\createBaiVietRequest;
 use App\Models\BaiViet;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class BaiVietController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(createBaiVietRequest $request)
     {
         $data   =   $request->all();
         BaiViet::create($data);

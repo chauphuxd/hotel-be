@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\createPhongRequest;
 use App\Models\Phong;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,7 @@ class PhongController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(createPhongRequest $request)
     {
         $data   =   $request->all();
         Phong::create($data);

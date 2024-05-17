@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\createPhanQuyenRequest;
 use App\Models\PhanQuyen;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class PhanQuyenController extends Controller
         ]);
     }
 
-    public function createData(Request $request)
+    public function createData(createPhanQuyenRequest $request)
     {
 
         PhanQuyen::create([

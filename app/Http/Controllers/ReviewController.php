@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\createReviewRequest;
 use App\Models\Review;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,7 @@ class ReviewController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(createReviewRequest $request)
     {
         $data   =   $request->all();
         Review::create($data);
