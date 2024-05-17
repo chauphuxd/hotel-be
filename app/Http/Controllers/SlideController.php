@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\createSlideRequest;
 use App\Models\Slide;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,7 @@ class SlideController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(createSlideRequest $request)
     {
         $data   =   $request->all();
         Slide::create($data);

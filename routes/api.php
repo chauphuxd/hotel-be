@@ -79,9 +79,9 @@ Route::group([], function() {
     Route::put('/khach-hang/doi-trang-thai', [KhachHangController::class, 'doiTrangThai']);
     Route::delete('/khach-hang/delete/{id}', [KhachHangController::class, 'destroy']);
     Route::put('/khach-hang/update', [KhachHangController::class, 'update']);
-    Route::post('/dang-ky', [KhachHangController::class, 'dangKy']);
 })->middleware("adminMiddle");
 
+Route::post('/dang-ky', [KhachHangController::class, 'dangKy']);
 Route::post('/admin/dang-nhap', [NhanVienController::class, 'dangNhap']);
 Route::post('/khach-hang/dang-nhap', [KhachHangController::class, 'dangNhap']);
 
