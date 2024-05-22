@@ -15,6 +15,16 @@ class BaiVietController extends Controller
             'bai_viet'  =>  $data
         ]);
     }
+    public function getdataClient()
+    {
+        $data = BaiViet::where('tinh_trang', 1)
+                        ->select('bai_viets.*')
+                        ->get(); // get là ra 1 danh sách;
+
+        return response()->json([
+            'bai_viet'  =>  $data
+        ]);
+    }
 
     public function store(createBaiVietRequest $request)
     {

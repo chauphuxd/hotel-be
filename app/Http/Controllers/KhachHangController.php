@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DangKyRequest;
 use App\Models\KhachHang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class KhachHangController extends Controller
 {
-    public function dangKy(Request $request)
+    public function dangKy(DangKyRequest $request)
     {
 
         $check_mail = KhachHang::where('email', $request->email)->first();
@@ -19,10 +20,10 @@ class KhachHangController extends Controller
                 'message' => "Email đã tồn tại trong hệ thống!"
             ]);
         } else {
-            
+
             $data   =   $request->all();
             $data['password'] = bcrypt($request->password);
-    
+
             KhachHang::create($data);
 
             return response()->json([
