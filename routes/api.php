@@ -15,7 +15,7 @@ use App\Http\Middleware\kiemTraAdminMiddleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::group([], function() {
+Route::group(['middleware' => 'adminMiddle'], function() {
     Route::get('/loai-phong/data', [LoaiPhongController::class, 'getData']);
     Route::post('/loai-phong/create', [LoaiPhongController::class, 'store']);
     Route::delete('/loai-phong/delete/{id}', [LoaiPhongController::class, 'destroy']);
@@ -79,8 +79,20 @@ Route::group([], function() {
     Route::put('/khach-hang/doi-trang-thai', [KhachHangController::class, 'doiTrangThai']);
     Route::delete('/khach-hang/delete/{id}', [KhachHangController::class, 'destroy']);
     Route::put('/khach-hang/update', [KhachHangController::class, 'update']);
-})->middleware("adminMiddle");
+});
 
+// data client home page
+Route::get('/homepage/data', [ReviewController::class, 'getDataHomepage']);
+
+// data client Bài viết
+Route::get('/client/bai-viet/data', [BaiVietController::class, 'getdataClient']);
+
+// data client Loại Phòng
+Route::get('/client/loai-phong/data', [LoaiPhongController::class, 'getdataClient']);
+
+
+
+// Đăng Nhập
 Route::post('/dang-ky', [KhachHangController::class, 'dangKy']);
 Route::post('/admin/dang-nhap', [NhanVienController::class, 'dangNhap']);
 Route::post('/khach-hang/dang-nhap', [KhachHangController::class, 'dangNhap']);

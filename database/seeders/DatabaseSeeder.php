@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
             ChucNangSeeder::class,
             NhanVienSeeder::class,
             BaiVietSeeder::class,
+            PhanQuyenSeeder::class,
+            KhachHangSeeder::class,
         ]);
     }
 }

@@ -11,7 +11,9 @@ class NhanVienController extends Controller
 {
     public function getData()
     {
-        $data = NhanVien::all();
+        $data = NhanVien::join('phan_quyens','nhan_viens.id_chuc_vu','phan_quyens.id')
+                        ->select('nhan_viens.*','phan_quyens.ten_quyen')
+                        ->get();
 
         return response()->json([
             'nhan_vien'  =>  $data

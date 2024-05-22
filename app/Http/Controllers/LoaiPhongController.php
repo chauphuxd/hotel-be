@@ -19,6 +19,18 @@ class LoaiPhongController extends Controller
             'loai_phong'  =>  $data
         ]);
     }
+    public function getdataClient()
+    {
+        $data =   LoaiPhong::where('tinh_trang', 1)
+                        ->select('loai_phongs.*')
+                        ->get(); // get là ra 1 danh sách;
+
+
+        return response()->json([
+            'status'      =>  true,
+            'loai_phong'  =>  $data
+        ]);
+    }
 
     public function store(createLoaiPhongRequest $request)
     {
