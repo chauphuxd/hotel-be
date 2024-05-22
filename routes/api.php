@@ -12,6 +12,7 @@ use App\Http\Controllers\PhongController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SlideController;
 use App\Http\Middleware\kiemTraAdminMiddleware;
+use App\Models\ChiTietThuePhong;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -96,3 +97,4 @@ Route::post('/admin/dang-nhap', [NhanVienController::class, 'dangNhap']);
 Route::post('/khach-hang/dang-nhap', [KhachHangController::class, 'dangNhap']);
 Route::post("/kiem-tra-token-admin", [NhanVienController::class, "kiemTraToken"]);
 Route::post("/kiem-tra-token-khach-hang", [KhachHangController::class, "kiemTraToken"]);
+Route::post("/danh-sach-phong-dat", [ChiTietThuePhongController::class, "danhSachHienThi"]);
