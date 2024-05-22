@@ -90,8 +90,6 @@ Route::get('/client/bai-viet/data', [BaiVietController::class, 'getdataClient'])
 // data client Loại Phòng
 Route::get('/client/loai-phong/data', [LoaiPhongController::class, 'getdataClient']);
 
-
-
 // Đăng Nhập
 Route::post('/dang-ky', [KhachHangController::class, 'dangKy']);
 Route::post('/admin/dang-nhap', [NhanVienController::class, 'dangNhap']);
