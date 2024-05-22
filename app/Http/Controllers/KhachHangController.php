@@ -113,4 +113,21 @@ class KhachHangController extends Controller
                 ]);
             }
     }
+
+    public function kiemTraToken()
+    {
+        // Lấy thông tin từ Authorization : 'Bearer ' gửi lên
+        $user = Auth::guard('sanctum')->user();
+        if($user && $user instanceof \App\Models\KhachHang) {
+            return response()->json([
+                'status'    =>  true,
+                'message'   =>  "Oke, bạn có thể đi qua",
+            ]);
+        } else {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  "Bạn cần đăng nhập hệ thống trước",
+            ]);
+        }
+    }
 }
