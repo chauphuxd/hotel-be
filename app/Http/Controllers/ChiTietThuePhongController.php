@@ -124,7 +124,7 @@ class ChiTietThuePhongController extends Controller
                                     ->join('loai_phongs', 'phongs.id_loai_phong', 'loai_phongs.id')
                                     ->where('chi_tiet_thue_phongs.tinh_trang', 1)
                                     ->where('loai_phongs.tinh_trang', 1)
-                                    ->whereDate('chi_tiet_thue_phongs.ngay_thue', '<=', $request->ngay_di)
+                                    ->whereDate('chi_tiet_thue_phongs.ngay_thue', '<', $request->ngay_di)
                                     ->whereDate('chi_tiet_thue_phongs.ngay_thue', '>=', $request->ngay_den)
                                     ->select(
                                             'loai_phongs.id',

@@ -4,6 +4,7 @@ use App\Http\Controllers\BaiVietController;
 use App\Http\Controllers\ChiTietThuePhongController;
 use App\Http\Controllers\ChucNangController;
 use App\Http\Controllers\DichVuController;
+use App\Http\Controllers\HoaDonController;
 use App\Http\Controllers\KhachHangController;
 use App\Http\Controllers\LoaiPhongController;
 use App\Http\Controllers\NhanVienController;
@@ -84,10 +85,8 @@ Route::group(['middleware' => 'adminMiddle'], function() {
 
 // data client home page
 Route::get('/homepage/data', [ReviewController::class, 'getDataHomepage']);
-
 // data client Bài viết
 Route::get('/client/bai-viet/data', [BaiVietController::class, 'getdataClient']);
-
 // data client Loại Phòng
 Route::get('/client/loai-phong/data', [LoaiPhongController::class, 'getdataClient']);
 
@@ -98,3 +97,7 @@ Route::post('/khach-hang/dang-nhap', [KhachHangController::class, 'dangNhap']);
 Route::post("/kiem-tra-token-admin", [NhanVienController::class, "kiemTraToken"]);
 Route::get("/kiem-tra-token-khach-hang", [KhachHangController::class, "kiemTraToken"]);
 Route::post("/danh-sach-phong-dat", [ChiTietThuePhongController::class, "danhSachHienThi"]);
+
+Route::group(['middleware' => 'khachHangMiddle'], function() {
+    Route::post('/khach-hang-dat-phong', [HoaDonController::class, 'datPhong']);
+});
