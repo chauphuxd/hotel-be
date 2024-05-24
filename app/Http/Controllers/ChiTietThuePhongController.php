@@ -162,6 +162,7 @@ class ChiTietThuePhongController extends Controller
             foreach($yyy as $key_2 => $value_2) {
                 if($value->id == $value_2->id) {
                     $value->gia_trung_binh = number_format($value_2->gia_trung_binh, 0);
+                    $value->gia_trung_binh_ko_format = intval($value_2->gia_trung_binh);
                 }
             }
         }
