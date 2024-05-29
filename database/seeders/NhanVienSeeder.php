@@ -19,10 +19,10 @@ class NhanVienSeeder extends Seeder
             [
                 'ma_nhan_vien'      =>  'DZ01',
                 'ho_va_ten'         =>  'Nguyễn Quốc Long',
-                'ngay_sinh'         =>  '2000-01=01',
+                'ngay_sinh'         =>  '2000-01-01',
                 'luong_co_ban'      =>  '10000000',
                 'id_chuc_vu'        =>  '1',
-                'ngay_bat_dau'      => '2024-01=01',
+                'ngay_bat_dau'      => '2024-01-01',
                 'so_dien_thoai'     =>  '0905.523.543',
                 'email'             =>  'quoclongdng@gmail.com',
                 'password'          =>  bcrypt('123456'),
