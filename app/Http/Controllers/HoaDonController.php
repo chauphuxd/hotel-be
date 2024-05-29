@@ -60,4 +60,56 @@ class HoaDonController extends Controller
             'message'   =>  'Đã đặt phòng thành công!',
         ]);
     }
+
+    public function getData()
+    {
+        $data   = HoaDon::join('khach_hangs', 'hoa_dons.id_khach_hang', 'khach_hangs.id')
+                        ->select('hoa_dons.*', 'khach_hangs.ho_lot', 'khach_hangs.ten')
+                        ->get();
+
+        return response()->json([
+            'data'    =>  $data,
+        ]);
+    }
+
+    public function chiTietThue(Request $request)
+    {
+        $id_hoa_don     =   $request->id;
+
+        $data   = ChiTietThuePhong::where('id_hoa_don', $id_hoa_don)
+                                  ->orderBy('ngay_thue')
+                                  ->join('phongs', 'chi_tiet_thue_phongs.id_phong', 'phongs.id')
+                                  ->join('loai_phongs', 'phongs.id_loai_phong', 'loai_phongs.id')
+                                  ->select('chi_tiet_thue_phongs.*', 'loai_phongs.ten_loai_phong', 'phongs.ten_phong')
+                                  ->get();
+
+        return response()->json([
+            'data'    =>  $data,
+        ]);
+    }
+
+    public function xacNhanDonHang(Request $request)
+    {
+        if(isset($request->thanh_toan)) {
+            HoaDon::where('id', $request->id_hoa_don)->update([
+                'is_thanh_toan' => 1
+            ]);
+            ChiTietThuePhong::where('id_hoa_don', $request->id_hoa_don)->update([
+                'tinh_trang'    =>  3
+            ]);
+        } else {
+            HoaDon::where('id', $request->id_hoa_don)->update([
+                'is_thanh_toan' => -1
+            ]);
+            ChiTietThuePhong::where('id_hoa_don', $request->id_hoa_don)->update([
+                'tinh_trang'    =>  1,
+                'id_hoa_don'    =>  null
+            ]);
+        }
+
+        return response()->json([
+            'status'    =>  true,
+            'message'   =>  'Đã xử lý đơn hàng thành công!',
+        ]);
+    }
 }

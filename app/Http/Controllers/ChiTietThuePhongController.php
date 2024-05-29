@@ -92,7 +92,6 @@ class ChiTietThuePhongController extends Controller
     {
         $xxx = ChiTietThuePhong::join('phongs', 'chi_tiet_thue_phongs.id_phong', 'phongs.id')
                                 ->join('loai_phongs', 'phongs.id_loai_phong', 'loai_phongs.id')
-                                ->where('chi_tiet_thue_phongs.tinh_trang', 1)
                                 ->where('loai_phongs.tinh_trang', 1)
                                 ->whereDate('chi_tiet_thue_phongs.ngay_thue', '<=', $request->ngay_di)
                                 ->whereDate('chi_tiet_thue_phongs.ngay_thue', '>=', $request->ngay_den)
@@ -106,7 +105,7 @@ class ChiTietThuePhongController extends Controller
                                         'loai_phongs.hinh_anh',
                                         'loai_phongs.tien_ich',
                                         'chi_tiet_thue_phongs.ngay_thue',
-                                        DB::raw("COUNT(chi_tiet_thue_phongs.id) as so_phong_trong"),
+                                        DB::raw("SUM(IF(chi_tiet_thue_phongs.tinh_trang = 1, 1, 0)) as so_phong_trong"),
                                     )
                                 ->groupBy(
                                         'loai_phongs.id',
@@ -120,6 +119,8 @@ class ChiTietThuePhongController extends Controller
                                         'chi_tiet_thue_phongs.ngay_thue'
                                 )
                                 ->get();
+
+
         $yyy    =   ChiTietThuePhong::join('phongs', 'chi_tiet_thue_phongs.id_phong', 'phongs.id')
                                     ->join('loai_phongs', 'phongs.id_loai_phong', 'loai_phongs.id')
                                     ->where('chi_tiet_thue_phongs.tinh_trang', 1)

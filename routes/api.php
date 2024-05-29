@@ -81,6 +81,12 @@ Route::group(['middleware' => 'adminMiddle'], function() {
     Route::put('/khach-hang/doi-trang-thai', [KhachHangController::class, 'doiTrangThai']);
     Route::delete('/khach-hang/delete/{id}', [KhachHangController::class, 'destroy']);
     Route::put('/khach-hang/update', [KhachHangController::class, 'update']);
+
+    Route::group(['prefix' => '/hoa-don'], function() {
+        Route::get('/data', [HoaDonController::class, 'getData']);
+        Route::post('/chi-tiet-thue', [HoaDonController::class, 'chiTietThue']);
+        Route::post('/xac-nhan-don-hang', [HoaDonController::class, 'xacNhanDonHang']);
+    });
 });
 
 // data client home page
