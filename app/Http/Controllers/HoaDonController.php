@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\ChiTietThuePhong;
 use App\Models\HoaDon;
+use App\Models\KhachHang;
+use App\Models\LoaiPhong;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class HoaDonController extends Controller
@@ -110,6 +113,104 @@ class HoaDonController extends Controller
         return response()->json([
             'status'    =>  true,
             'message'   =>  'Đã xử lý đơn hàng thành công!',
+        ]);
+    }
+
+    public function thongKe1() 
+    {
+        $data = HoaDon::select(
+            DB::raw("SUM(tong_tien) as tong_tien_theo_ngay"),
+            DB::raw("DATE_FORMAT(created_at, '%d/%m/%Y') as ngay_tao"),
+        )
+        ->groupBy('ngay_tao')
+        ->orderBy('created_at')
+        ->get();
+        $list_ngay          = [];
+        $list_tong_tien     = [];
+
+        foreach ($data as $key => $value) {
+            array_push($list_ngay, $value->ngay_tao);
+            array_push($list_tong_tien, $value->tong_tien_theo_ngay);
+        }
+
+        return response()->json([
+            'list_ngay' => $list_ngay,
+            'list_tong_tien'  => $list_tong_tien,
+        ]);
+    }
+
+    public function thongKe2() 
+    {
+        $data = LoaiPhong::join('phongs', 'phongs.id_loai_phong', 'loai_phongs.id')
+                         ->join('chi_tiet_thue_phongs', 'chi_tiet_thue_phongs.id_phong', 'phongs.id')
+                         ->select(
+                            DB::raw("COUNT(chi_tiet_thue_phongs.id) as so_luong_phong"),
+                            'loai_phongs.ten_loai_phong'
+                         )
+                         ->where('chi_tiet_thue_phongs.tinh_trang', 2)
+                         ->groupBy('loai_phongs.ten_loai_phong')
+                         ->get();
+        $list_ten          = [];
+        $list_so_luong     = [];
+
+        foreach ($data as $key => $value) {
+            array_push($list_ten, $value->ten_loai_phong);
+            array_push($list_so_luong, $value->so_luong_phong);
+        }
+
+        return response()->json([
+            'list_ten' => $list_ten,
+            'list_so_luong'  => $list_so_luong,
+        ]);
+    }
+
+    public function thongKe3() 
+    {
+        $data = KhachHang::leftJoin('hoa_dons', 'hoa_dons.id_khach_hang', 'khach_hangs.id')
+                         ->select(
+                            DB::raw("SUM(IF(hoa_dons.is_thanh_toan = 1, hoa_dons.tong_tien, 0)) as tong_tien_da_thanh_toan"),
+                            'khach_hangs.ten',
+                            'khach_hangs.ho_lot',
+                         )
+                         ->where('hoa_dons.is_thanh_toan', 1)
+                         ->groupBy('khach_hangs.ten', 'khach_hangs.ho_lot')
+                         ->get();
+        $list_ten           = [];
+        $list_tong_tien     = [];
+
+        foreach ($data as $key => $value) {
+            array_push($list_ten, $value->ho_lot . ' ' . $value->ten);
+            array_push($list_tong_tien, $value->tong_tien_da_thanh_toan);
+        }
+
+        return response()->json([
+            'list_ten' => $list_ten,
+            'list_tong_tien'  => $list_tong_tien,
+        ]);
+    }
+
+    public function thongKe4() 
+    {
+        $data = KhachHang::leftJoin('hoa_dons', 'hoa_dons.id_khach_hang', 'khach_hangs.id')
+                         ->join('chi_tiet_thue_phongs', 'chi_tiet_thue_phongs.id_hoa_don', 'hoa_dons.id')
+                         ->select(
+                            DB::raw("COUNT(chi_tiet_thue_phongs.id) as so_luong_thue"),
+                            'khach_hangs.ten',
+                            'khach_hangs.ho_lot',
+                         )
+                         ->groupBy('khach_hangs.ten', 'khach_hangs.ho_lot')
+                         ->get();
+        $list_ten           = [];
+        $list_so_luong      = [];
+
+        foreach ($data as $key => $value) {
+            array_push($list_ten, $value->ho_lot . ' ' . $value->ten);
+            array_push($list_so_luong, $value->so_luong_thue);
+        }
+
+        return response()->json([
+            'list_ten' => $list_ten,
+            'list_so_luong'  => $list_so_luong,
         ]);
     }
 }

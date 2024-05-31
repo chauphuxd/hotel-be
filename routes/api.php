@@ -86,6 +86,13 @@ Route::group(['middleware' => 'adminMiddle'], function() {
         Route::get('/data', [HoaDonController::class, 'getData']);
         Route::post('/chi-tiet-thue', [HoaDonController::class, 'chiTietThue']);
         Route::post('/xac-nhan-don-hang', [HoaDonController::class, 'xacNhanDonHang']);
+        Route::get('/thong-ke-1', [HoaDonController::class, 'thongKe1']);
+        Route::get('/thong-ke-2', [HoaDonController::class, 'thongKe2']);
+        Route::get('/thong-ke-3', [HoaDonController::class, 'thongKe3']);
+        Route::get('/thong-ke-4', [HoaDonController::class, 'thongKe4']);
+        Route::get('/thong-ke-5', [HoaDonController::class, 'thongKe5']);
+        Route::get('/thong-ke-6', [HoaDonController::class, 'thongKe6']);
+
     });
 });
 
