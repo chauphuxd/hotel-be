@@ -90,8 +90,6 @@ Route::group(['middleware' => 'adminMiddle'], function() {
         Route::get('/thong-ke-2', [HoaDonController::class, 'thongKe2']);
         Route::get('/thong-ke-3', [HoaDonController::class, 'thongKe3']);
         Route::get('/thong-ke-4', [HoaDonController::class, 'thongKe4']);
-        Route::get('/thong-ke-5', [HoaDonController::class, 'thongKe5']);
-        Route::get('/thong-ke-6', [HoaDonController::class, 'thongKe6']);
 
     });
 });
