@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'adminMiddle'], function() {
     Route::get('/loai-phong/data', [LoaiPhongController::class, 'getData']);
     Route::post('/loai-phong/create', [LoaiPhongController::class, 'store']);
+    Route::post('/loai-phong/tim-kiem', [LoaiPhongController::class, 'timKiem']);
     Route::delete('/loai-phong/delete/{id}', [LoaiPhongController::class, 'destroy']);
     Route::put('/loai-phong/update', [LoaiPhongController::class, 'update']);
     Route::put('/loai-phong/doi-trang-thai', [LoaiPhongController::class, 'doiTrangThai']);
@@ -112,3 +113,6 @@ Route::post("/danh-sach-phong-dat", [ChiTietThuePhongController::class, "danhSac
 Route::group(['middleware' => 'khachHangMiddle'], function() {
     Route::post('/khach-hang-dat-phong', [HoaDonController::class, 'datPhong']);
 });
+
+Route::post("/khach-hang/dat-lai-mat-khau", [KhachHangController::class, 'datLaiMatKhau']);
+Route::post("/khach-hang/quen-mat-khau", [KhachHangController::class, 'quenMatKhau']);
