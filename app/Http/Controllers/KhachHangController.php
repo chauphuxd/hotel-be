@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DangKyRequest;
+use App\Http\Requests\KhachHangDatLaiMatKhauRequest;
+use App\Http\Requests\KhachHangQuenMatKhauRequest;
 use App\Models\KhachHang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class KhachHangController extends Controller
 {
@@ -129,5 +132,33 @@ class KhachHangController extends Controller
                 'message'   =>  "Bạn cần đăng nhập hệ thống trước",
             ]);
         }
+    }
+
+    public function datLaiMatKhau(KhachHangDatLaiMatKhauRequest $request)
+    {
+        KhachHang::where('hash_reset', $request->hash_reset)->update([
+            'password'      =>  bcrypt($request->password),
+            'hash_reset'    =>  null
+        ]);
+
+        return response()->json([
+            'status'    =>  true,
+            'message'   =>  "Đã đặt lại mật khẩu thành công!",
+        ]);
+    }
+
+    public function quenMatKhau(KhachHangQuenMatKhauRequest $request)
+    {
+        $hash_reset     =   Str::uuid();
+        KhachHang::where('email', $request->email)->update([
+            'hash_reset'   =>   $hash_reset
+        ]);
+
+        // Gửi email tới tài khoản $request->email + $hash_reset
+
+        return response()->json([
+            'status'    =>  true,
+            'message'   =>  "Vui lòng kiểm tra email!",
+        ]);
     }
 }

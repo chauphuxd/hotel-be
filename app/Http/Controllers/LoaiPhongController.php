@@ -10,6 +10,24 @@ use Illuminate\Support\Facades\Auth;
 
 class LoaiPhongController extends Controller
 {
+    public function timKiem(Request $request)
+    {
+        $noi_dung   = '%' . $request->noi_dung_tim . '%';
+
+        $data   = LoaiPhong::where('ten_loai_phong', 'like', $noi_dung)
+                           ->orWhere('so_giuong', 'like', $noi_dung)
+                           ->orWhere('so_nguoi_lon', 'like', $noi_dung)
+                           ->orWhere('so_tre_em', 'like', $noi_dung)
+                           ->orWhere('dien_tich', 'like', $noi_dung)
+                           ->orWhere('tien_ich', 'like', $noi_dung)
+                           ->get();
+
+        return response()->json([
+            'data'  =>  $data
+        ]);
+
+    }
+
     public function getData()
     {
         $data   =   LoaiPhong::all();
