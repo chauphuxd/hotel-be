@@ -13,6 +13,16 @@ class kiemTraKhachHangMiddleware
     {
         $user   =   Auth::guard('sanctum')->user();
         if($user && $user instanceof \App\Models\KhachHang) {
+            if($user->is_block) {
+                return response()->json([
+                    'status'    =>  false
+                ]);
+            }
+            if($user->is_active == false) {
+                return response()->json([
+                    'status'    =>  false
+                ]);
+            }
             return $next($request);
         } else {
             return response()->json([

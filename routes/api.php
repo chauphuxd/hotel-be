@@ -116,3 +116,4 @@ Route::group(['middleware' => 'khachHangMiddle'], function() {
 
 Route::post("/khach-hang/dat-lai-mat-khau", [KhachHangController::class, 'datLaiMatKhau']);
 Route::post("/khach-hang/quen-mat-khau", [KhachHangController::class, 'quenMatKhau']);
+Route::post("/khach-hang/kich-hoat", [KhachHangController::class, 'kichHoat']);
