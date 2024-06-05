@@ -10,6 +10,8 @@ class DichVuController extends Controller
 {
     public function timKiem(Request $request)
     {
+        $id_chuc_nang   = 12;
+
         $noi_dung   = '%' . $request->noi_dung_tim . '%';
 
         $data   = DichVu::where('ten_dich_vu', 'like', $noi_dung)
@@ -26,6 +28,8 @@ class DichVuController extends Controller
 
     public function getData()
     {
+        $id_chuc_nang   = 7;
+
         $data   =   DichVu::all();
 
         return response()->json([
@@ -35,6 +39,8 @@ class DichVuController extends Controller
 
     public function store(createDichVuRequest $request)
     {
+        $id_chuc_nang   = 8;
+
         $data   =   $request->all();
         DichVu::create($data);
 
@@ -46,6 +52,8 @@ class DichVuController extends Controller
 
     public function destroy($id)
     {
+        $id_chuc_nang   = 9;
+
         DichVu::find($id)->delete();
 
         return response()->json([
@@ -56,6 +64,8 @@ class DichVuController extends Controller
 
     public function update(Request $request)
     {
+        $id_chuc_nang   = 10;
+
         $data   = $request->all();
 
         DichVu::find($request->id)->update($data);
@@ -67,6 +77,8 @@ class DichVuController extends Controller
     }
     public function doiTrangThai(Request $request)
     {
+        $id_chuc_nang   = 11;
+
         $dich_vu = DichVu::find($request->id);
         if($dich_vu) {
             if($dich_vu->tinh_trang == 1) {
