@@ -8,6 +8,23 @@ use Illuminate\Http\Request;
 
 class PhongController extends Controller
 {
+    public function timKiem(Request $request)
+    {
+        $noi_dung   = '%' . $request->noi_dung_tim . '%';
+
+        $data   = Phong::join('loai_phongs', 'phongs.id_loai_phong', 'loai_phongs.id')
+                           ->where('ten_phong', 'like', $noi_dung)
+                           ->orWhere('gia_mac_dinh', 'like', $noi_dung)
+                           ->orWhere('tien_ich_khac', 'like', $noi_dung)
+                           ->select('phongs.*', 'loai_phongs.ten_loai_phong')
+                           ->get();
+
+        return response()->json([
+            'data'  =>  $data
+        ]);
+
+    }
+
     public function getData()
     {
         $data   =   Phong::join('loai_phongs', 'phongs.id_loai_phong', 'loai_phongs.id')

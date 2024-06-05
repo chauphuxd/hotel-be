@@ -8,6 +8,19 @@ use Illuminate\Http\Request;
 
 class PhanQuyenController extends Controller
 {
+    public function timKiem(Request $request)
+    {
+        $noi_dung   = '%' . $request->noi_dung_tim . '%';
+
+        $data   = PhanQuyen::where('ten_quyen', 'like', $noi_dung)
+                           ->get();
+
+        return response()->json([
+            'data'  =>  $data
+        ]);
+
+    }
+
     public function getData()
     {
 

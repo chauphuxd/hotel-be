@@ -31,6 +31,7 @@ Route::group(['middleware' => 'adminMiddle'], function() {
     Route::delete('/dich-vu/delete/{id}', [DichVuController::class, 'destroy']);
     Route::put('/dich-vu/update', [DichVuController::class, 'update']);
     Route::put('/dich-vu/doi-trang-thai', [DichVuController::class, 'doiTrangThai']);
+    Route::post('/dich-vu/tim-kiem', [DichVuController::class, 'timKiem']);
 
 
     Route::get('/phong/data', [PhongController::class, 'getData']);
@@ -38,6 +39,8 @@ Route::group(['middleware' => 'adminMiddle'], function() {
     Route::delete('/phong/delete/{id}', [PhongController::class, 'destroy']);
     Route::put('/phong/update', [PhongController::class, 'update']);
     Route::put('/phong/doi-trang-thai', [PhongController::class, 'doiTrangThai']);
+    Route::post('/phong/tim-kiem', [PhongController::class, 'timKiem']);
+
 
 
     Route::get('/nhan-vien/data', [NhanVienController::class, 'getData']);
@@ -45,31 +48,42 @@ Route::group(['middleware' => 'adminMiddle'], function() {
     Route::delete('/nhan-vien/delete/{id}', [NhanVienController::class, 'destroy']);
     Route::put('/nhan-vien/update', [NhanVienController::class, 'update']);
     Route::put('/nhan-vien/doi-trang-thai', [NhanVienController::class, 'doiTrangThai']);
+    Route::post('/nhan-vien/tim-kiem', [NhanVienController::class, 'timKiem']);
+
 
     Route::get('/slide/data', [SlideController::class, 'getData']);
     Route::post('/slide/create', [SlideController::class, 'store']);
     Route::delete('/slide/delete/{id}', [SlideController::class, 'destroy']);
     Route::put('/slide/update', [SlideController::class, 'update']);
     Route::put('/slide/doi-trang-thai', [SlideController::class, 'doiTrangThai']);
+    Route::post('/slide/tim-kiem', [SlideController::class, 'timKiem']);
+
 
 
     Route::get('/review/data', [ReviewController::class, 'getData']);
     Route::post('/review/create', [ReviewController::class, 'store']);
     Route::delete('/review/delete/{id}', [ReviewController::class, 'destroy']);
     Route::put('/review/update', [ReviewController::class, 'update']);
+    Route::post('/review/tim-kiem', [ReviewController::class, 'timKiem']);
+
 
     Route::get('/phan-quyen/data', [PhanQuyenController::class, 'getData']);
     Route::post('/phan-quyen/create', [PhanQuyenController::class, 'createData']);
     Route::delete('/phan-quyen/delete/{id}', [PhanQuyenController::class, 'deleteData']);
     Route::put('/phan-quyen/update', [PhanQuyenController::class, 'UpateData']);
+    Route::post('/phan-quyen/tim-kiem', [PhanQuyenController::class, 'timKiem']);
+
 
     Route::get('/chuc-nang/data', [ChucNangController::class, 'getData']);
 
     Route::post('/chi-tiet-thue-phong/create', [ChiTietThuePhongController::class, 'createData']);
     Route::get('/chi-tiet-thue-phong/data', [ChiTietThuePhongController::class, 'getData']);
     Route::put('/chi-tiet-thue-phong/update', [ChiTietThuePhongController::class, 'UpdateData']);
+    Route::post('/chi-tiet-thue-phong/tim-kiem', [ChiTietThuePhongController::class, 'timKiem']);
+
 
     Route::get('/data', [ChiTietThuePhongController::class, 'data']);
+    Route::post('/thong-ke-thue-phong/tim-kiem', [ChiTietThuePhongController::class, 'timKiemThuePhong']);
 
 
     Route::get('/bai-viet/data', [BaiVietController::class, 'getData']);
@@ -77,16 +91,21 @@ Route::group(['middleware' => 'adminMiddle'], function() {
     Route::delete('/bai-viet/delete/{id}', [BaiVietController::class, 'destroy']);
     Route::put('/bai-viet/update', [BaiVietController::class, 'update']);
     Route::put('/bai-viet/doi-trang-thai', [BaiVietController::class, 'doiTrangThai']);
+    Route::post('/bai-viet/tim-kiem', [BaiVietController::class, 'timKiem']);
+
 
     Route::get('/khach-hang/data', [KhachHangController::class, 'getData']);
     Route::put('/khach-hang/doi-trang-thai', [KhachHangController::class, 'doiTrangThai']);
     Route::delete('/khach-hang/delete/{id}', [KhachHangController::class, 'destroy']);
     Route::put('/khach-hang/update', [KhachHangController::class, 'update']);
+    Route::post('/khach-hang/tim-kiem', [KhachHangController::class, 'timKiem']);
+    
 
     Route::group(['prefix' => '/hoa-don'], function() {
         Route::get('/data', [HoaDonController::class, 'getData']);
         Route::post('/chi-tiet-thue', [HoaDonController::class, 'chiTietThue']);
         Route::post('/xac-nhan-don-hang', [HoaDonController::class, 'xacNhanDonHang']);
+        Route::post('/tim-kiem', [HoaDonController::class, 'timKiem']);
         Route::get('/thong-ke-1', [HoaDonController::class, 'thongKe1']);
         Route::get('/thong-ke-2', [HoaDonController::class, 'thongKe2']);
         Route::get('/thong-ke-3', [HoaDonController::class, 'thongKe3']);
@@ -101,6 +120,8 @@ Route::get('/homepage/data', [ReviewController::class, 'getDataHomepage']);
 Route::get('/client/bai-viet/data', [BaiVietController::class, 'getdataClient']);
 // data client Loại Phòng
 Route::get('/client/loai-phong/data', [LoaiPhongController::class, 'getdataClient']);
+
+Route::get('/client/chi-tiet-bai-viet/{id}', [BaiVietController::class, 'getdataChiTietClient']);
 
 // Đăng Nhập
 Route::post('/dang-ky', [KhachHangController::class, 'dangKy']);

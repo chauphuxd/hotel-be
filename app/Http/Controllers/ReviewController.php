@@ -10,6 +10,21 @@ use Illuminate\Support\Facades\Redis;
 
 class ReviewController extends Controller
 {
+    public function timKiem(Request $request)
+    {
+        $noi_dung   = '%' . $request->noi_dung_tim . '%';
+
+        $data   = Review::where('ho_va_ten', 'like', $noi_dung)
+                           ->orWhere('noi_dung', 'like', $noi_dung)
+                           ->orWhere('sao_danh_gia', 'like', $noi_dung)
+                           ->get();
+
+        return response()->json([
+            'data'  =>  $data
+        ]);
+
+    }
+
     public function getData()
     {
         $data   =   Review::all();

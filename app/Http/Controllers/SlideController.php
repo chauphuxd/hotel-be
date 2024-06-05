@@ -8,6 +8,19 @@ use Illuminate\Http\Request;
 
 class SlideController extends Controller
 {
+    public function timKiem(Request $request)
+    {
+        $noi_dung   = '%' . $request->noi_dung_tim . '%';
+
+        $data   = Slide::where('link_hinh_anh', 'like', $noi_dung)
+                           ->get();
+
+        return response()->json([
+            'data'  =>  $data
+        ]);
+
+    }
+
     public function getData()
     {
         $data   =   Slide::all();

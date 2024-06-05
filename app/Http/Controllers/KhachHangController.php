@@ -14,6 +14,22 @@ use Illuminate\Support\Str;
 
 class KhachHangController extends Controller
 {
+    public function timKiem(Request $request)
+    {
+        $noi_dung   = '%' . $request->noi_dung_tim . '%';
+
+        $data   = KhachHang::where('ho_lot', 'like', $noi_dung)
+                           ->orWhere('ten', 'like', $noi_dung)
+                           ->orWhere('email', 'like', $noi_dung)
+                           ->orWhere('so_dien_thoai', 'like', $noi_dung)
+                           ->get();
+
+        return response()->json([
+            'data'  =>  $data
+        ]);
+
+    }
+
     public function dangKy(DangKyRequest $request)
     {
         $check_mail = KhachHang::where('email', $request->email)->first();
@@ -118,6 +134,7 @@ class KhachHangController extends Controller
                     return response()->json([
                         'status'    =>  true,
                         'token'     => $user->createToken('token')->plainTextToken,
+                        'ho_ten'    => $user->ho_lot . " " . $user->ten,
                         'message'   =>  'Đã đăng nhập thành công'
                     ]);
                 } else {
@@ -154,7 +171,7 @@ class KhachHangController extends Controller
 
     public function datLaiMatKhau(KhachHangDatLaiMatKhauRequest $request)
     {
-        KhachHang::where('hash_reset', $request->hash_reset)->where('email', $request->email)->update([
+        KhachHang::where('hash_reset', $request->hash_reset)->update([
             'password'      =>  bcrypt($request->password),
             'hash_reset'    =>  null
         ]);
@@ -167,22 +184,30 @@ class KhachHangController extends Controller
 
     public function quenMatKhau(KhachHangQuenMatKhauRequest $request)
     {
-        $hash_reset     =   random_int(100000, 999999);
+        $hash_reset     =   Str::uuid();
         KhachHang::where('email', $request->email)->update([
             'hash_reset'   =>   $hash_reset
         ]);
 
         $kh = KhachHang::where('email', $request->email)->first();
-        $data['ho_va_ten']  = $kh->ho_lot . " " . $kh->ten;
-        $data['link_ne']    = "http://localhost:5173/dat-lai-mat-khau/" . $hash_reset;
+        if($kh) {
+            $data['ho_va_ten']  = $kh->ho_lot . " " . $kh->ten;
+            $data['link_ne']    = "http://localhost:5173/dat-lai-mat-khau/" . $hash_reset;
 
-        // Gửi email tới tài khoản $request->email + $hash_reset
-        Mail::to($request->email)->send(new SendMail("Khôi Phục Mật Khẩu", "quen_mat_khau", $data));
+            // Gửi email tới tài khoản $request->email + $hash_reset
+            Mail::to($request->email)->send(new SendMail("Khôi Phục Mật Khẩu", "quen_mat_khau", $data));
 
-        return response()->json([
-            'status'    =>  true,
-            'message'   =>  "Vui lòng kiểm tra email!",
-        ]);
+            return response()->json([
+                'status'    =>  true,
+                'message'   =>  "Vui lòng kiểm tra email!",
+            ]);
+        } else {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  "Email không tồn tại!",
+            ]);
+        }
+        
     }
 
     public function kichHoat(Request $request)

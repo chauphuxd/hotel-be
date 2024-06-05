@@ -9,6 +9,23 @@ use Illuminate\Support\Facades\Auth;
 
 class NhanVienController extends Controller
 {
+    public function timKiem(Request $request)
+    {
+        $noi_dung   = '%' . $request->noi_dung_tim . '%';
+
+        $data   = NhanVien::join('phan_quyens','nhan_viens.id_chuc_vu','phan_quyens.id')
+                           ->where('ho_va_ten', 'like', $noi_dung)
+                           ->orWhere('so_dien_thoai', 'like', $noi_dung)
+                           ->orWhere('luong_co_ban', 'like', $noi_dung)
+                           ->select('nhan_viens.*','phan_quyens.ten_quyen')
+                           ->get();
+
+        return response()->json([
+            'data'  =>  $data
+        ]);
+
+    }
+
     public function getData()
     {
         $data = NhanVien::join('phan_quyens','nhan_viens.id_chuc_vu','phan_quyens.id')
@@ -65,9 +82,10 @@ class NhanVienController extends Controller
             if($check){
                 $user =  Auth::guard('nhan_vien')->user();
                 return response()->json([
-                    'status'    =>  true,
-                    'token'     => $user->createToken('token')->plainTextToken,
-                    'message'   =>  'Đã đăng nhập thành công'
+                    'status'        =>  true,
+                    'token'         => $user->createToken('token')->plainTextToken,
+                    'ho_ten_admin'  => $user->ho_va_ten,
+                    'message'       =>  'Đã đăng nhập thành công'
                 ]);
             }else{
                 return response()->json([

@@ -8,6 +8,30 @@ use Illuminate\Http\Request;
 
 class BaiVietController extends Controller
 {
+    public function timKiem(Request $request)
+    {
+        $noi_dung   = '%' . $request->noi_dung_tim . '%';
+
+        $data   = BaiViet::where('ten_bai_viet', 'like', $noi_dung)
+                           ->orWhere('mo_ta_ngan', 'like', $noi_dung)
+                           ->orWhere('mo_ta_chi_tiet', 'like', $noi_dung)
+                           ->get();
+
+        return response()->json([
+            'data'  =>  $data
+        ]);
+
+    }
+
+    public function getdataChiTietClient($id)
+    {
+        $baiViet = BaiViet::where('id', $id)->first();
+
+        return response()->json([
+            'bai_viet'   => $baiViet,
+        ]);
+    }
+
     public function getData()
     {
         $data = BaiViet::all();

@@ -8,6 +8,22 @@ use Illuminate\Http\Request;
 
 class DichVuController extends Controller
 {
+    public function timKiem(Request $request)
+    {
+        $noi_dung   = '%' . $request->noi_dung_tim . '%';
+
+        $data   = DichVu::where('ten_dich_vu', 'like', $noi_dung)
+                           ->orWhere('don_gia', 'like', $noi_dung)
+                           ->orWhere('don_vi_tinh', 'like', $noi_dung)
+                           ->orWhere('ghi_chu', 'like', $noi_dung)
+                           ->get();
+
+        return response()->json([
+            'data'  =>  $data
+        ]);
+
+    }
+
     public function getData()
     {
         $data   =   DichVu::all();

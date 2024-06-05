@@ -14,6 +14,22 @@ use Illuminate\Support\Str;
 
 class HoaDonController extends Controller
 {
+    public function timKiem(Request $request)
+    {
+        $noi_dung   = '%' . $request->noi_dung_tim . '%';
+
+        $data   = HoaDon::where('ma_hoa_don', 'like', $noi_dung)
+                           ->orWhere('tong_tien', 'like', $noi_dung)
+                           ->orWhere('ngay_den', 'like', $noi_dung)
+                           ->orWhere('ngay_di', 'like', $noi_dung)
+                           ->get();
+
+        return response()->json([
+            'data'  =>  $data
+        ]);
+
+    }
+
     public function datPhong(Request $request)
     {
         $ngay_den   =   Carbon::createFromDate($request->tt_dat_phong['ngay_den']);
