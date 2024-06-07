@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\createLoaiPhongRequest;
+use App\Models\ChiTietPhanQuyen;
 use App\Models\LoaiPhong;
 use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Http\Request;
@@ -13,7 +14,16 @@ class LoaiPhongController extends Controller
     public function timKiem(Request $request)
     {
         $id_chuc_nang   = 3;
-
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
         $noi_dung   = '%' . $request->noi_dung_tim . '%';
 
         $data   = LoaiPhong::where('ten_loai_phong', 'like', $noi_dung)
@@ -33,6 +43,16 @@ class LoaiPhongController extends Controller
     public function getData()
     {
         $id_chuc_nang   = 1;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $data   =   LoaiPhong::all();
 
@@ -57,7 +77,16 @@ class LoaiPhongController extends Controller
     public function store(createLoaiPhongRequest $request)
     {
         $id_chuc_nang   = 2;
-
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
         $data   =   $request->all();
         LoaiPhong::create($data);
 
@@ -70,7 +99,16 @@ class LoaiPhongController extends Controller
     public function destroy($id)
     {
         $id_chuc_nang   = 4;
-
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
         LoaiPhong::find($id)->delete();
 
         return response()->json([
@@ -82,7 +120,16 @@ class LoaiPhongController extends Controller
     public function update(Request $request)
     {
         $id_chuc_nang   = 5;
-
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
         $data   = $request->all();
 
         LoaiPhong::find($request->id)->update($data);
@@ -95,7 +142,16 @@ class LoaiPhongController extends Controller
     public function doiTrangThai(Request $request)
     {
         $id_chuc_nang   = 6;
-
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
         $loai_phong = LoaiPhong::find($request->id);
         if($loai_phong) {
             if($loai_phong->tinh_trang == 1) {

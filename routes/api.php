@@ -117,6 +117,7 @@ Route::group(['middleware' => 'adminMiddle'], function() {
 
     Route::post("/chi-tiet-phan-quyen/cap-quyen", [ChiTietPhanQuyenController::class, 'capQuyen']);
     Route::post("/chi-tiet-phan-quyen/danh-sach", [ChiTietPhanQuyenController::class, 'getData']);
+    Route::post("/chi-tiet-phan-quyen/xoa-quyen", [ChiTietPhanQuyenController::class, 'xoaQuyen']);
 });
 
 // data client home page

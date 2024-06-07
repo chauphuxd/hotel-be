@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendMail;
 use App\Models\ChiTietThuePhong;
 use App\Models\HoaDon;
 use App\Models\KhachHang;
@@ -10,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class HoaDonController extends Controller
@@ -34,7 +36,8 @@ class HoaDonController extends Controller
 
     public function datPhong(Request $request)
     {
-        $ngay_den   =   Carbon::createFromDate($request->tt_dat_phong['ngay_den']);
+        $ngay_den               =   Carbon::createFromDate($request->tt_dat_phong['ngay_den']);
+        $data['tu_ngay']        =  $ngay_den->format('d/m/Y');
         $ngay_di    =   Carbon::createFromDate($request->tt_dat_phong['ngay_di']);
         $data_loai_phong    = $request->tt_loai_phong;
         $khach_hang =   Auth::guard('sanctum')->user();
@@ -75,6 +78,15 @@ class HoaDonController extends Controller
 
         $hoaDon->tong_tien  = ChiTietThuePhong::where('id_hoa_don', $hoaDon->id)->sum('gia_thue');
         $hoaDon->save();
+
+        // Gửi EMAIL
+        $data['ho_va_ten']      =  $khach_hang->ho_lot . " " . $khach_hang->ten;
+        $data['den_ngay']       =  $ngay_di->format('d/m/Y');
+        $data['tong_tien']      =  number_format($hoaDon->tong_tien, 0, ",", ".");
+        $link_demo  = "https://img.vietqr.io/image/MB-1910061030119-compact.jpg?amount=". $hoaDon->tong_tien ."&addInfo=TTDP" . $hoaDon->id;
+        $data['ma_qr_code']     =  $link_demo;
+
+        Mail::to($khach_hang->email)->send(new SendMail('Xác Nhân Đơn Đặt Phòng Tại Khách Sạn', 'xac_nhan_don_hang', $data));
 
         return response()->json([
             'status'    =>  true,
@@ -140,7 +152,7 @@ class HoaDonController extends Controller
         ]);
     }
 
-    public function thongKe1() 
+    public function thongKe1()
     {
         $id_chuc_nang   = 63;
 
@@ -165,7 +177,7 @@ class HoaDonController extends Controller
         ]);
     }
 
-    public function thongKe2() 
+    public function thongKe2()
     {
         $id_chuc_nang   = 64;
 
@@ -192,7 +204,7 @@ class HoaDonController extends Controller
         ]);
     }
 
-    public function thongKe3() 
+    public function thongKe3()
     {
         $id_chuc_nang   = 65;
 
@@ -219,7 +231,7 @@ class HoaDonController extends Controller
         ]);
     }
 
-    public function thongKe4() 
+    public function thongKe4()
     {
         $id_chuc_nang   = 66;
 

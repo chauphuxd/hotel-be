@@ -27,10 +27,22 @@ class ChiTietPhanQuyenController extends Controller
     {
         $id_chuc_nang   = 60;
 
-        $data   = ChiTietPhanQuyen::get();
+        $data   = ChiTietPhanQuyen::join('chuc_nangs', 'chi_tiet_phan_quyens.id_chuc_nang', 'chuc_nangs.id')
+                                  ->select('chi_tiet_phan_quyens.*', 'chuc_nangs.ten_chuc_nang')
+                                  ->get();
 
         return response()->json([
             'data'    =>  $data,
+        ]);
+    }
+
+    public function xoaQuyen(Request $request)
+    {
+        ChiTietPhanQuyen::where('id', $request->id)->delete();
+
+        return response()->json([
+            'status'    =>  true,
+            'message'   =>  'Đã xoá phân quyền thành công!'
         ]);
     }
 }
