@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BaiVietController;
+use App\Http\Controllers\ChiTietPhanQuyenController;
 use App\Http\Controllers\ChiTietThuePhongController;
 use App\Http\Controllers\ChucNangController;
 use App\Http\Controllers\DichVuController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\PhongController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SlideController;
 use App\Http\Middleware\kiemTraAdminMiddleware;
+use App\Models\ChiTietPhanQuyen;
 use App\Models\ChiTietThuePhong;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -99,7 +101,7 @@ Route::group(['middleware' => 'adminMiddle'], function() {
     Route::delete('/khach-hang/delete/{id}', [KhachHangController::class, 'destroy']);
     Route::put('/khach-hang/update', [KhachHangController::class, 'update']);
     Route::post('/khach-hang/tim-kiem', [KhachHangController::class, 'timKiem']);
-    
+
 
     Route::group(['prefix' => '/hoa-don'], function() {
         Route::get('/data', [HoaDonController::class, 'getData']);
@@ -112,6 +114,9 @@ Route::group(['middleware' => 'adminMiddle'], function() {
         Route::get('/thong-ke-4', [HoaDonController::class, 'thongKe4']);
 
     });
+
+    Route::post("/chi-tiet-phan-quyen/cap-quyen", [ChiTietPhanQuyenController::class, 'capQuyen']);
+    Route::post("/chi-tiet-phan-quyen/danh-sach", [ChiTietPhanQuyenController::class, 'getData']);
 });
 
 // data client home page

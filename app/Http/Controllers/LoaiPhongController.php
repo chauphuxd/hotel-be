@@ -12,6 +12,8 @@ class LoaiPhongController extends Controller
 {
     public function timKiem(Request $request)
     {
+        $id_chuc_nang   = 3;
+
         $noi_dung   = '%' . $request->noi_dung_tim . '%';
 
         $data   = LoaiPhong::where('ten_loai_phong', 'like', $noi_dung)
@@ -30,6 +32,8 @@ class LoaiPhongController extends Controller
 
     public function getData()
     {
+        $id_chuc_nang   = 1;
+
         $data   =   LoaiPhong::all();
 
         return response()->json([
@@ -52,6 +56,8 @@ class LoaiPhongController extends Controller
 
     public function store(createLoaiPhongRequest $request)
     {
+        $id_chuc_nang   = 2;
+
         $data   =   $request->all();
         LoaiPhong::create($data);
 
@@ -63,6 +69,8 @@ class LoaiPhongController extends Controller
 
     public function destroy($id)
     {
+        $id_chuc_nang   = 4;
+
         LoaiPhong::find($id)->delete();
 
         return response()->json([
@@ -73,6 +81,8 @@ class LoaiPhongController extends Controller
 
     public function update(Request $request)
     {
+        $id_chuc_nang   = 5;
+
         $data   = $request->all();
 
         LoaiPhong::find($request->id)->update($data);
@@ -84,6 +94,8 @@ class LoaiPhongController extends Controller
     }
     public function doiTrangThai(Request $request)
     {
+        $id_chuc_nang   = 6;
+
         $loai_phong = LoaiPhong::find($request->id);
         if($loai_phong) {
             if($loai_phong->tinh_trang == 1) {

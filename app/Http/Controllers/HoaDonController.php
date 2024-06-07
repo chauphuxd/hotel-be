@@ -16,6 +16,8 @@ class HoaDonController extends Controller
 {
     public function timKiem(Request $request)
     {
+        $id_chuc_nang   = 62;
+
         $noi_dung   = '%' . $request->noi_dung_tim . '%';
 
         $data   = HoaDon::where('ma_hoa_don', 'like', $noi_dung)
@@ -82,6 +84,8 @@ class HoaDonController extends Controller
 
     public function getData()
     {
+        $id_chuc_nang   = 59;
+
         $data   = HoaDon::join('khach_hangs', 'hoa_dons.id_khach_hang', 'khach_hangs.id')
                         ->select('hoa_dons.*', 'khach_hangs.ho_lot', 'khach_hangs.ten')
                         ->get();
@@ -93,6 +97,8 @@ class HoaDonController extends Controller
 
     public function chiTietThue(Request $request)
     {
+        $id_chuc_nang   = 60;
+
         $id_hoa_don     =   $request->id;
 
         $data   = ChiTietThuePhong::where('id_hoa_don', $id_hoa_don)
@@ -109,6 +115,8 @@ class HoaDonController extends Controller
 
     public function xacNhanDonHang(Request $request)
     {
+        $id_chuc_nang   = 61;
+
         if(isset($request->thanh_toan)) {
             HoaDon::where('id', $request->id_hoa_don)->update([
                 'is_thanh_toan' => 1
@@ -134,6 +142,8 @@ class HoaDonController extends Controller
 
     public function thongKe1() 
     {
+        $id_chuc_nang   = 63;
+
         $data = HoaDon::select(
             DB::raw("SUM(tong_tien) as tong_tien_theo_ngay"),
             DB::raw("DATE_FORMAT(created_at, '%d/%m/%Y') as ngay_tao"),
@@ -157,6 +167,8 @@ class HoaDonController extends Controller
 
     public function thongKe2() 
     {
+        $id_chuc_nang   = 64;
+
         $data = LoaiPhong::join('phongs', 'phongs.id_loai_phong', 'loai_phongs.id')
                          ->join('chi_tiet_thue_phongs', 'chi_tiet_thue_phongs.id_phong', 'phongs.id')
                          ->select(
@@ -182,6 +194,8 @@ class HoaDonController extends Controller
 
     public function thongKe3() 
     {
+        $id_chuc_nang   = 65;
+
         $data = KhachHang::leftJoin('hoa_dons', 'hoa_dons.id_khach_hang', 'khach_hangs.id')
                          ->select(
                             DB::raw("SUM(IF(hoa_dons.is_thanh_toan = 1, hoa_dons.tong_tien, 0)) as tong_tien_da_thanh_toan"),
@@ -207,6 +221,8 @@ class HoaDonController extends Controller
 
     public function thongKe4() 
     {
+        $id_chuc_nang   = 66;
+
         $data = KhachHang::leftJoin('hoa_dons', 'hoa_dons.id_khach_hang', 'khach_hangs.id')
                          ->join('chi_tiet_thue_phongs', 'chi_tiet_thue_phongs.id_hoa_don', 'hoa_dons.id')
                          ->select(

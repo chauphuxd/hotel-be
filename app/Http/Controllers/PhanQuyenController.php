@@ -10,6 +10,8 @@ class PhanQuyenController extends Controller
 {
     public function timKiem(Request $request)
     {
+        $id_chuc_nang   = 40;
+
         $noi_dung   = '%' . $request->noi_dung_tim . '%';
 
         $data   = PhanQuyen::where('ten_quyen', 'like', $noi_dung)
@@ -24,6 +26,8 @@ class PhanQuyenController extends Controller
     public function getData()
     {
 
+        $id_chuc_nang   = 36;
+
         $data = PhanQuyen::get();
 
         return response()->json([
@@ -33,6 +37,8 @@ class PhanQuyenController extends Controller
 
     public function createData(createPhanQuyenRequest $request)
     {
+
+        $id_chuc_nang   = 37;
 
         PhanQuyen::create([
             'ten_quyen'         => $request->ten_quyen,
@@ -45,6 +51,8 @@ class PhanQuyenController extends Controller
     }
     public function UpateData(Request $request)
     {
+
+        $id_chuc_nang   = 39;
 
         $ten_quyen = PhanQuyen::where('id', $request->id)->first();
         if($ten_quyen) {
@@ -66,6 +74,8 @@ class PhanQuyenController extends Controller
     }
     public function deleteData($id)
     {
+
+        $id_chuc_nang   = 38;
 
         $ten_quyen = PhanQuyen::where('id', $id)->first();
 

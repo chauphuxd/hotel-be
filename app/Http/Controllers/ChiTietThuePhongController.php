@@ -12,6 +12,8 @@ class ChiTietThuePhongController extends Controller
 {
     public function timKiemThuePhong(Request $request)
     {
+        $id_chuc_nang   = 47;
+
         $noi_dung   = '%' . $request->noi_dung_tim . '%';
 
         $data = ChiTietThuePhong::select('ngay_thue', 'tinh_trang', DB::raw("COUNT(id) as tong"))
@@ -49,6 +51,8 @@ class ChiTietThuePhongController extends Controller
 
     public function timKiem(Request $request)
     {
+        $id_chuc_nang   = 45;
+
         $noi_dung   = '%' . $request->noi_dung_tim . '%';
 
         $data   = ChiTietThuePhong::where('gia_thue', 'like', $noi_dung)
@@ -63,6 +67,8 @@ class ChiTietThuePhongController extends Controller
 
     public function createData(Request $request)
     {
+        $id_chuc_nang   = 42;
+
         $today  =   Carbon::today();
 
         $ngayCuoiNam    = Carbon::now()->endOfMonth();
@@ -91,6 +97,8 @@ class ChiTietThuePhongController extends Controller
     public function getData()
     {
 
+        $id_chuc_nang   = 43;
+
         $data = ChiTietThuePhong::get();
         return response()->json([
             'data' => $data
@@ -98,6 +106,8 @@ class ChiTietThuePhongController extends Controller
     }
     public function UpdateData(Request $request)
     {
+        $id_chuc_nang   = 44;
+
         $data   = $request->all();
 
         ChiTietThuePhong::find($request->id)->update($data);
@@ -110,6 +120,8 @@ class ChiTietThuePhongController extends Controller
 
     public function data()
     {
+        $id_chuc_nang   = 46;
+
         $data = ChiTietThuePhong::select('ngay_thue', 'tinh_trang', DB::raw("COUNT(id) as tong"))
                                 ->groupBy('ngay_thue', 'tinh_trang')
                                 ->orderBy('ngay_thue')

@@ -10,6 +10,8 @@ class SlideController extends Controller
 {
     public function timKiem(Request $request)
     {
+        $id_chuc_nang   = 30;
+
         $noi_dung   = '%' . $request->noi_dung_tim . '%';
 
         $data   = Slide::where('link_hinh_anh', 'like', $noi_dung)
@@ -23,6 +25,8 @@ class SlideController extends Controller
 
     public function getData()
     {
+        $id_chuc_nang   = 25;
+
         $data   =   Slide::all();
 
         return response()->json([
@@ -32,6 +36,8 @@ class SlideController extends Controller
 
     public function store(createSlideRequest $request)
     {
+        $id_chuc_nang   = 26;
+
         $data   =   $request->all();
         Slide::create($data);
 
@@ -43,6 +49,8 @@ class SlideController extends Controller
 
     public function destroy($id)
     {
+        $id_chuc_nang   = 27;
+
         Slide::find($id)->delete();
 
         return response()->json([
@@ -53,6 +61,8 @@ class SlideController extends Controller
 
     public function update(Request $request)
     {
+        $id_chuc_nang   = 28;
+
         $data   = $request->all();
 
         Slide::find($request->id)->update($data);
@@ -64,6 +74,8 @@ class SlideController extends Controller
     }
     public function doiTrangThai(Request $request)
     {
+        $id_chuc_nang   = 29;
+
         $slide = Slide::find($request->id);
         if($slide) {
             if($slide->tinh_trang == 1) {

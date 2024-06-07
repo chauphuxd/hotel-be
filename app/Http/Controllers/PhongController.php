@@ -10,6 +10,9 @@ class PhongController extends Controller
 {
     public function timKiem(Request $request)
     {
+        
+        $id_chuc_nang   = 18;
+
         $noi_dung   = '%' . $request->noi_dung_tim . '%';
 
         $data   = Phong::join('loai_phongs', 'phongs.id_loai_phong', 'loai_phongs.id')
@@ -27,6 +30,8 @@ class PhongController extends Controller
 
     public function getData()
     {
+        $id_chuc_nang   = 13;
+
         $data   =   Phong::join('loai_phongs', 'phongs.id_loai_phong', 'loai_phongs.id')
                          ->select('phongs.*', 'loai_phongs.ten_loai_phong')
                          ->get();
@@ -38,6 +43,8 @@ class PhongController extends Controller
 
     public function store(createPhongRequest $request)
     {
+        $id_chuc_nang   = 14;
+
         $data   =   $request->all();
         Phong::create($data);
 
@@ -49,6 +56,8 @@ class PhongController extends Controller
 
     public function destroy($id)
     {
+        $id_chuc_nang   = 15;
+
         Phong::find($id)->delete();
 
         return response()->json([
@@ -59,6 +68,8 @@ class PhongController extends Controller
 
     public function update(Request $request)
     {
+        $id_chuc_nang   = 16;
+
         $data   = $request->all();
 
         Phong::find($request->id)->update($data);
@@ -70,6 +81,8 @@ class PhongController extends Controller
     }
     public function doiTrangThai(Request $request)
     {
+        $id_chuc_nang   = 17;
+
         $phong = Phong::find($request->id);
         if($phong) {
             if($phong->tinh_trang == 1) {
