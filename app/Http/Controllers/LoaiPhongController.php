@@ -47,7 +47,7 @@ class LoaiPhongController extends Controller
         $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
                                     ->where('id_chuc_nang', $id_chuc_nang)
                                     ->first();
-        if(!$check) {
+        if(!$check && $user->is_master == 0) {
             return response()->json([
                 'status'    =>  false,
                 'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
