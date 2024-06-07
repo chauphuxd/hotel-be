@@ -11,6 +11,8 @@ class NhanVienController extends Controller
 {
     public function timKiem(Request $request)
     {
+        $id_chuc_nang   = 24;
+
         $noi_dung   = '%' . $request->noi_dung_tim . '%';
 
         $data   = NhanVien::join('phan_quyens','nhan_viens.id_chuc_vu','phan_quyens.id')
@@ -28,6 +30,8 @@ class NhanVienController extends Controller
 
     public function getData()
     {
+        $id_chuc_nang   = 19;
+
         $data = NhanVien::join('phan_quyens','nhan_viens.id_chuc_vu','phan_quyens.id')
                         ->select('nhan_viens.*','phan_quyens.ten_quyen')
                         ->get();
@@ -39,6 +43,8 @@ class NhanVienController extends Controller
 
     public function store(ThemMoiNhanVienRequest $request)
     {
+        $id_chuc_nang   = 20;
+
         $data   =   $request->all();
 
         $data['password'] = bcrypt($request->password);
@@ -52,6 +58,8 @@ class NhanVienController extends Controller
 
     public function destroy($id)
     {
+        $id_chuc_nang   = 21;
+
         NhanVien::find($id)->delete();
 
         return response()->json([
@@ -62,6 +70,8 @@ class NhanVienController extends Controller
 
     public function update(Request $request)
     {
+        $id_chuc_nang   = 22;
+
         $data   = $request->all();
 
         NhanVien::find($request->id)->update($data);
@@ -96,6 +106,8 @@ class NhanVienController extends Controller
     }
     public function doiTrangThai(Request $request)
     {
+        $id_chuc_nang   = 23;
+
         $nhan_vien = NhanVien::find($request->id);
         if($nhan_vien) {
             if($nhan_vien->tinh_trang == 1) {

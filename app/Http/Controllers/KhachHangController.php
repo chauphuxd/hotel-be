@@ -16,6 +16,8 @@ class KhachHangController extends Controller
 {
     public function timKiem(Request $request)
     {
+        $id_chuc_nang   = 58;
+
         $noi_dung   = '%' . $request->noi_dung_tim . '%';
 
         $data   = KhachHang::where('ho_lot', 'like', $noi_dung)
@@ -60,6 +62,8 @@ class KhachHangController extends Controller
 
     public function getData()
     {
+        $id_chuc_nang   = 54;
+
         $data = KhachHang::all();
 
         return response()->json([
@@ -69,6 +73,8 @@ class KhachHangController extends Controller
 
     public function doiTrangThai(Request $request)
     {
+        $id_chuc_nang   = 55;
+
         $khach_hang = KhachHang::find($request->id);
         if($khach_hang) {
             if($khach_hang->is_block == 1) {
@@ -97,6 +103,8 @@ class KhachHangController extends Controller
 
     public function destroy($id)
     {
+        $id_chuc_nang   = 56;
+
         KhachHang::find($id)->delete();
 
         return response()->json([
@@ -107,6 +115,8 @@ class KhachHangController extends Controller
 
     public function update(Request $request)
     {
+        $id_chuc_nang   = 57;
+
         $data   = $request->all();
         // return response()->json($data);
         KhachHang::find($request->id)->update($data);

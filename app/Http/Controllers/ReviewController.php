@@ -12,6 +12,8 @@ class ReviewController extends Controller
 {
     public function timKiem(Request $request)
     {
+        $id_chuc_nang   = 35;
+
         $noi_dung   = '%' . $request->noi_dung_tim . '%';
 
         $data   = Review::where('ho_va_ten', 'like', $noi_dung)
@@ -27,6 +29,8 @@ class ReviewController extends Controller
 
     public function getData()
     {
+        $id_chuc_nang   = 31;
+
         $data   =   Review::all();
 
         return response()->json([
@@ -36,6 +40,8 @@ class ReviewController extends Controller
 
     public function store(createReviewRequest $request)
     {
+        $id_chuc_nang   = 32;
+
         $data   =   $request->all();
         Review::create($data);
 
@@ -47,6 +53,8 @@ class ReviewController extends Controller
 
     public function destroy($id)
     {
+        $id_chuc_nang   = 33;
+
         Review::find($id)->delete();
 
         return response()->json([
@@ -57,6 +65,8 @@ class ReviewController extends Controller
 
     public function update(Request $request)
     {
+        $id_chuc_nang   = 34;
+
         $data   = $request->all();
 
         Review::find($request->id)->update($data);

@@ -10,6 +10,8 @@ class BaiVietController extends Controller
 {
     public function timKiem(Request $request)
     {
+        $id_chuc_nang   = 53;
+
         $noi_dung   = '%' . $request->noi_dung_tim . '%';
 
         $data   = BaiViet::where('ten_bai_viet', 'like', $noi_dung)
@@ -34,6 +36,8 @@ class BaiVietController extends Controller
 
     public function getData()
     {
+        $id_chuc_nang   = 48;
+
         $data = BaiViet::all();
         return response()->json([
             'bai_viet'  =>  $data
@@ -52,6 +56,8 @@ class BaiVietController extends Controller
 
     public function store(createBaiVietRequest $request)
     {
+        $id_chuc_nang   = 49;
+
         $data   =   $request->all();
         BaiViet::create($data);
         return response()->json([
@@ -62,6 +68,8 @@ class BaiVietController extends Controller
 
     public function destroy($id)
     {
+        $id_chuc_nang   = 50;
+
         BaiViet::find($id)->delete();
 
         return response()->json([
@@ -72,6 +80,8 @@ class BaiVietController extends Controller
 
     public function update(Request $request)
     {
+        $id_chuc_nang   = 51;
+
         $data   = $request->all();
         BaiViet::find($request->id)->update($data);
 
@@ -83,6 +93,8 @@ class BaiVietController extends Controller
 
     public function doiTrangThai(Request $request)
     {
+        $id_chuc_nang   = 52;
+
         $bai_viet = BaiViet::find($request->id);
         if($bai_viet) {
             if($bai_viet->tinh_trang == 1) {

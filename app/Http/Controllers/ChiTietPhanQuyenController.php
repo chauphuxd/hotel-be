@@ -10,6 +10,8 @@ class ChiTietPhanQuyenController extends Controller
 {
     public function capQuyen(CapQuyenRequest $request)
     {
+        $id_chuc_nang   = 67;
+
         ChiTietPhanQuyen::firstOrCreate([
             'id_quyen'      =>   $request->id_quyen,
             'id_chuc_nang'  =>   $request->id_chuc_nang,
@@ -23,6 +25,8 @@ class ChiTietPhanQuyenController extends Controller
 
     public function getData(Request $request)
     {
+        $id_chuc_nang   = 60;
+
         $data   = ChiTietPhanQuyen::get();
 
         return response()->json([

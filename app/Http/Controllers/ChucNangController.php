@@ -9,6 +9,8 @@ class ChucNangController extends Controller
 {
     public function getData()
     {
+        $id_chuc_nang   = 41;
+
         $data = ChucNang::get();
         
         return response()->json([
