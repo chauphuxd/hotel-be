@@ -3,14 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\createSlideRequest;
+use App\Models\ChiTietPhanQuyen;
 use App\Models\Slide;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SlideController extends Controller
 {
     public function timKiem(Request $request)
     {
         $id_chuc_nang   = 30;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $noi_dung   = '%' . $request->noi_dung_tim . '%';
 
@@ -26,6 +38,16 @@ class SlideController extends Controller
     public function getData()
     {
         $id_chuc_nang   = 25;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $data   =   Slide::all();
 
@@ -37,6 +59,16 @@ class SlideController extends Controller
     public function store(createSlideRequest $request)
     {
         $id_chuc_nang   = 26;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $data   =   $request->all();
         Slide::create($data);
@@ -50,6 +82,16 @@ class SlideController extends Controller
     public function destroy($id)
     {
         $id_chuc_nang   = 27;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         Slide::find($id)->delete();
 
@@ -62,6 +104,16 @@ class SlideController extends Controller
     public function update(Request $request)
     {
         $id_chuc_nang   = 28;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $data   = $request->all();
 
@@ -75,6 +127,16 @@ class SlideController extends Controller
     public function doiTrangThai(Request $request)
     {
         $id_chuc_nang   = 29;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $slide = Slide::find($request->id);
         if($slide) {

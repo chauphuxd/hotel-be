@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\createPhongRequest;
+use App\Models\ChiTietPhanQuyen;
 use App\Models\Phong;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PhongController extends Controller
 {
@@ -12,6 +14,16 @@ class PhongController extends Controller
     {
         
         $id_chuc_nang   = 18;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $noi_dung   = '%' . $request->noi_dung_tim . '%';
 
@@ -31,6 +43,16 @@ class PhongController extends Controller
     public function getData()
     {
         $id_chuc_nang   = 13;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $data   =   Phong::join('loai_phongs', 'phongs.id_loai_phong', 'loai_phongs.id')
                          ->select('phongs.*', 'loai_phongs.ten_loai_phong')
@@ -44,6 +66,16 @@ class PhongController extends Controller
     public function store(createPhongRequest $request)
     {
         $id_chuc_nang   = 14;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $data   =   $request->all();
         Phong::create($data);
@@ -57,6 +89,16 @@ class PhongController extends Controller
     public function destroy($id)
     {
         $id_chuc_nang   = 15;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         Phong::find($id)->delete();
 
@@ -69,6 +111,16 @@ class PhongController extends Controller
     public function update(Request $request)
     {
         $id_chuc_nang   = 16;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $data   = $request->all();
 
@@ -82,6 +134,16 @@ class PhongController extends Controller
     public function doiTrangThai(Request $request)
     {
         $id_chuc_nang   = 17;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $phong = Phong::find($request->id);
         if($phong) {

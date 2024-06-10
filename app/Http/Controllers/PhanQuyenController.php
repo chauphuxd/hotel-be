@@ -3,15 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\createPhanQuyenRequest;
+use App\Models\ChiTietPhanQuyen;
 use App\Models\PhanQuyen;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PhanQuyenController extends Controller
 {
     public function timKiem(Request $request)
     {
         $id_chuc_nang   = 40;
-
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
         $noi_dung   = '%' . $request->noi_dung_tim . '%';
 
         $data   = PhanQuyen::where('ten_quyen', 'like', $noi_dung)
@@ -27,7 +38,16 @@ class PhanQuyenController extends Controller
     {
 
         $id_chuc_nang   = 36;
-
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
         $data = PhanQuyen::get();
 
         return response()->json([
@@ -39,7 +59,16 @@ class PhanQuyenController extends Controller
     {
 
         $id_chuc_nang   = 37;
-
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
         PhanQuyen::create([
             'ten_quyen'         => $request->ten_quyen,
         ]);
@@ -53,7 +82,16 @@ class PhanQuyenController extends Controller
     {
 
         $id_chuc_nang   = 39;
-
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
         $ten_quyen = PhanQuyen::where('id', $request->id)->first();
         if($ten_quyen) {
             $ten_quyen->update([
@@ -76,7 +114,16 @@ class PhanQuyenController extends Controller
     {
 
         $id_chuc_nang   = 38;
-
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
         $ten_quyen = PhanQuyen::where('id', $id)->first();
 
         if($ten_quyen) {

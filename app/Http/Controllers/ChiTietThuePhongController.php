@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChiTietPhanQuyen;
 use App\Models\ChiTietThuePhong;
 use App\Models\LoaiPhong;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ChiTietThuePhongController extends Controller
@@ -13,6 +15,16 @@ class ChiTietThuePhongController extends Controller
     public function timKiemThuePhong(Request $request)
     {
         $id_chuc_nang   = 47;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $noi_dung   = '%' . $request->noi_dung_tim . '%';
 
@@ -52,6 +64,16 @@ class ChiTietThuePhongController extends Controller
     public function timKiem(Request $request)
     {
         $id_chuc_nang   = 45;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $noi_dung   = '%' . $request->noi_dung_tim . '%';
 
@@ -68,6 +90,16 @@ class ChiTietThuePhongController extends Controller
     public function createData(Request $request)
     {
         $id_chuc_nang   = 42;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $today  =   Carbon::today();
 
@@ -98,6 +130,16 @@ class ChiTietThuePhongController extends Controller
     {
 
         $id_chuc_nang   = 43;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $data = ChiTietThuePhong::get();
         return response()->json([
@@ -107,6 +149,16 @@ class ChiTietThuePhongController extends Controller
     public function UpdateData(Request $request)
     {
         $id_chuc_nang   = 44;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $data   = $request->all();
 
@@ -121,6 +173,16 @@ class ChiTietThuePhongController extends Controller
     public function data()
     {
         $id_chuc_nang   = 46;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $data = ChiTietThuePhong::select('ngay_thue', 'tinh_trang', DB::raw("COUNT(id) as tong"))
                                 ->groupBy('ngay_thue', 'tinh_trang')

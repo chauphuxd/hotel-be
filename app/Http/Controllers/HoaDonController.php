@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\SendMail;
+use App\Models\ChiTietPhanQuyen;
 use App\Models\ChiTietThuePhong;
 use App\Models\HoaDon;
 use App\Models\KhachHang;
@@ -19,6 +20,16 @@ class HoaDonController extends Controller
     public function timKiem(Request $request)
     {
         $id_chuc_nang   = 62;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $noi_dung   = '%' . $request->noi_dung_tim . '%';
 
@@ -97,6 +108,16 @@ class HoaDonController extends Controller
     public function getData()
     {
         $id_chuc_nang   = 59;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $data   = HoaDon::join('khach_hangs', 'hoa_dons.id_khach_hang', 'khach_hangs.id')
                         ->select('hoa_dons.*', 'khach_hangs.ho_lot', 'khach_hangs.ten')
@@ -110,6 +131,16 @@ class HoaDonController extends Controller
     public function chiTietThue(Request $request)
     {
         $id_chuc_nang   = 60;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $id_hoa_don     =   $request->id;
 
@@ -128,6 +159,16 @@ class HoaDonController extends Controller
     public function xacNhanDonHang(Request $request)
     {
         $id_chuc_nang   = 61;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         if(isset($request->thanh_toan)) {
             HoaDon::where('id', $request->id_hoa_don)->update([
@@ -155,6 +196,16 @@ class HoaDonController extends Controller
     public function thongKe1()
     {
         $id_chuc_nang   = 63;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $data = HoaDon::select(
             DB::raw("SUM(tong_tien) as tong_tien_theo_ngay"),
@@ -180,6 +231,16 @@ class HoaDonController extends Controller
     public function thongKe2()
     {
         $id_chuc_nang   = 64;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $data = LoaiPhong::join('phongs', 'phongs.id_loai_phong', 'loai_phongs.id')
                          ->join('chi_tiet_thue_phongs', 'chi_tiet_thue_phongs.id_phong', 'phongs.id')
@@ -207,6 +268,16 @@ class HoaDonController extends Controller
     public function thongKe3()
     {
         $id_chuc_nang   = 65;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $data = KhachHang::leftJoin('hoa_dons', 'hoa_dons.id_khach_hang', 'khach_hangs.id')
                          ->select(
@@ -234,6 +305,16 @@ class HoaDonController extends Controller
     public function thongKe4()
     {
         $id_chuc_nang   = 66;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $data = KhachHang::leftJoin('hoa_dons', 'hoa_dons.id_khach_hang', 'khach_hangs.id')
                          ->join('chi_tiet_thue_phongs', 'chi_tiet_thue_phongs.id_hoa_don', 'hoa_dons.id')

@@ -4,6 +4,7 @@ use App\Http\Controllers\BaiVietController;
 use App\Http\Controllers\ChiTietPhanQuyenController;
 use App\Http\Controllers\ChiTietThuePhongController;
 use App\Http\Controllers\ChucNangController;
+use App\Http\Controllers\ChuyenMucController;
 use App\Http\Controllers\DichVuController;
 use App\Http\Controllers\HoaDonController;
 use App\Http\Controllers\KhachHangController;
@@ -95,6 +96,12 @@ Route::group(['middleware' => 'adminMiddle'], function() {
     Route::put('/bai-viet/doi-trang-thai', [BaiVietController::class, 'doiTrangThai']);
     Route::post('/bai-viet/tim-kiem', [BaiVietController::class, 'timKiem']);
 
+    Route::get('/chuyen-muc/data', [ChuyenMucController::class, 'getData']);
+    Route::post('/chuyen-muc/create', [ChuyenMucController::class, 'store']);
+    Route::delete('/chuyen-muc/delete/{id}', [ChuyenMucController::class, 'destroy']);
+    Route::put('/chuyen-muc/update', [ChuyenMucController::class, 'update']);
+    Route::put('/chuyen-muc/doi-trang-thai', [ChuyenMucController::class, 'doiTrangThai']);
+    Route::post('/chuyen-muc/tim-kiem', [ChuyenMucController::class, 'timKiem']);
 
     Route::get('/khach-hang/data', [KhachHangController::class, 'getData']);
     Route::put('/khach-hang/doi-trang-thai', [KhachHangController::class, 'doiTrangThai']);
@@ -123,7 +130,9 @@ Route::group(['middleware' => 'adminMiddle'], function() {
 // data client home page
 Route::get('/homepage/data', [ReviewController::class, 'getDataHomepage']);
 // data client Bài viết
-Route::get('/client/bai-viet/data', [BaiVietController::class, 'getdataClient']);
+Route::get('/client/chuyen-muc/data', [ChuyenMucController::class, 'getdataClient']);
+
+Route::get('/client/bai-viet/data/{slug_chuyen_muc}', [BaiVietController::class, 'getdataClient']);
 // data client Loại Phòng
 Route::get('/client/loai-phong/data', [LoaiPhongController::class, 'getdataClient']);
 
@@ -144,3 +153,9 @@ Route::group(['middleware' => 'khachHangMiddle'], function() {
 Route::post("/khach-hang/dat-lai-mat-khau", [KhachHangController::class, 'datLaiMatKhau']);
 Route::post("/khach-hang/quen-mat-khau", [KhachHangController::class, 'quenMatKhau']);
 Route::post("/khach-hang/kich-hoat", [KhachHangController::class, 'kichHoat']);
+
+Route::get('khach-hang/dang-xuat', [KhachhangController::class, 'dangXuat']);
+Route::get('khach-hang/dang-xuat-all', [KhachhangController::class, 'dangXuatAll']);
+
+Route::get('admin/dang-xuat', [NhanVienController::class, 'dangXuat']);
+Route::get('admin/dang-xuat-all', [NhanVienController::class, 'dangXuatAll']);

@@ -3,14 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\createDichVuRequest;
+use App\Models\ChiTietPhanQuyen;
 use App\Models\DichVu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DichVuController extends Controller
 {
     public function timKiem(Request $request)
     {
         $id_chuc_nang   = 12;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $noi_dung   = '%' . $request->noi_dung_tim . '%';
 
@@ -29,6 +41,16 @@ class DichVuController extends Controller
     public function getData()
     {
         $id_chuc_nang   = 7;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $data   =   DichVu::all();
 
@@ -40,6 +62,16 @@ class DichVuController extends Controller
     public function store(createDichVuRequest $request)
     {
         $id_chuc_nang   = 8;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $data   =   $request->all();
         DichVu::create($data);
@@ -53,6 +85,16 @@ class DichVuController extends Controller
     public function destroy($id)
     {
         $id_chuc_nang   = 9;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         DichVu::find($id)->delete();
 
@@ -65,6 +107,16 @@ class DichVuController extends Controller
     public function update(Request $request)
     {
         $id_chuc_nang   = 10;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $data   = $request->all();
 
@@ -78,6 +130,16 @@ class DichVuController extends Controller
     public function doiTrangThai(Request $request)
     {
         $id_chuc_nang   = 11;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
 
         $dich_vu = DichVu::find($request->id);
         if($dich_vu) {

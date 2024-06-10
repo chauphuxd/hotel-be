@@ -86,6 +86,12 @@ class ChucNangSeeder extends Seeder
             ['id' => 66, 'ten_chuc_nang' => 'Thống Kê Số Lượng Thuê Của Khách Hàng'],
             ['id' => 67, 'ten_chuc_nang' => 'Tạo Mới Chức Năng Cho Quyền'],
             ['id' => 68, 'ten_chuc_nang' => 'Xem Thông Tin Chi Tiết Phân Quyền'],
+            ['id' => 69, 'ten_chuc_nang' => 'Xem Thông Tin Chuyên Mục'],
+            ['id' => 70, 'ten_chuc_nang' => 'Tạo Mới Chuyên Mục'],
+            ['id' => 71, 'ten_chuc_nang' => 'Xóa Chuyên Mục'],
+            ['id' => 72, 'ten_chuc_nang' => 'Cập Nhật Chuyên Mục'],
+            ['id' => 73, 'ten_chuc_nang' => 'Đổi trạng thái Chuyên Mục'],
+            ['id' => 74, 'ten_chuc_nang' => 'Tìm Kiếm Chuyên Mục'],
         ]);
     }
 }

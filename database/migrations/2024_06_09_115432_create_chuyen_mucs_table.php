@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bai_viets', function (Blueprint $table) {
+        Schema::create('chuyen_mucs', function (Blueprint $table) {
             $table->id();
-            $table->string('ten_bai_viet');
-            $table->string('mo_ta_ngan');
-            $table->longText('mo_ta_chi_tiet');
-            $table->string('hinh_anh');
-            $table->integer('tinh_trang');
-            $table->integer('id_chuyen_muc');
+            $table->string('ten_chuyen_muc');
+            $table->string('slug_chuyen_muc');
+            $table->string('tinh_trang');
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bai_viets');
+        Schema::dropIfExists('chuyen_mucs');
     }
 };
