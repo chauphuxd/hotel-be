@@ -59,6 +59,7 @@ class GiaoDichController extends Controller
                         }
                     }
                 }
+                echo $value['description'] . " --- " . $value['creditAmount'];
             }
 
         } catch(Exception $e) {
