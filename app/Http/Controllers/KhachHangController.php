@@ -173,6 +173,46 @@ class KhachHangController extends Controller
         }
     }
 
+    public function doiKichHoat(Request $request)
+    {
+        $id_chuc_nang   = 75;
+        $user   =  Auth::guard('sanctum')->user();
+        $check  =   ChiTietPhanQuyen::where('id_quyen', $user->id_chuc_vu)
+                                    ->where('id_chuc_nang', $id_chuc_nang)
+                                    ->first();
+        if(!$check) {
+            return response()->json([
+                'status'    =>  false,
+                'message'   =>  'Bạn không đủ quyền truy cập chức năng này!',
+            ]);
+        }
+
+        $khach_hang = KhachHang::find($request->id);
+        if($khach_hang) {
+            if($khach_hang->is_active == 1) {
+                $khach_hang->is_active = 0;
+            } else {
+                $khach_hang->is_active = 1;
+            }
+
+            // $khach_hang->is_block = !$khach_hang->is_block;
+
+            // $khach_hang->is_block = $khach_hang->is_block == 0 ? 1 : 0;
+
+            $khach_hang->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => "Đổi kích hoạt tài khoản thành công!"
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => "Đã có lỗi xảy ra!"
+            ]);
+        }
+    }
+
     public function destroy($id)
     {
         $id_chuc_nang   = 56;

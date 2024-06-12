@@ -92,6 +92,7 @@ class ChucNangSeeder extends Seeder
             ['id' => 72, 'ten_chuc_nang' => 'Cập Nhật Chuyên Mục'],
             ['id' => 73, 'ten_chuc_nang' => 'Đổi trạng thái Chuyên Mục'],
             ['id' => 74, 'ten_chuc_nang' => 'Tìm Kiếm Chuyên Mục'],
+            ['id' => 75, 'ten_chuc_nang' => 'Đổi Kích Hoạt Khách Hàng'],
         ]);
     }
 }

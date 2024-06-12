@@ -92,6 +92,7 @@ class ChiTietPhanQuyenSeeder extends Seeder
             ['id' => '72', 'id_quyen' => '1', 'id_chuc_nang' => '72'],
             ['id' => '73', 'id_quyen' => '1', 'id_chuc_nang' => '73'],
             ['id' => '74', 'id_quyen' => '1', 'id_chuc_nang' => '74'],
+            ['id' => '75', 'id_quyen' => '1', 'id_chuc_nang' => '75'],
         ]);
     }
 }

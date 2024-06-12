@@ -108,6 +108,7 @@ Route::group(['middleware' => 'adminMiddle'], function() {
 
     Route::get('/khach-hang/data', [KhachHangController::class, 'getData']);
     Route::put('/khach-hang/doi-trang-thai', [KhachHangController::class, 'doiTrangThai']);
+    Route::put('/khach-hang/doi-kich-hoat', [KhachHangController::class, 'doiKichHoat']);
     Route::delete('/khach-hang/delete/{id}', [KhachHangController::class, 'destroy']);
     Route::put('/khach-hang/update', [KhachHangController::class, 'update']);
     Route::post('/khach-hang/tim-kiem', [KhachHangController::class, 'timKiem']);
@@ -151,6 +152,9 @@ Route::post("/danh-sach-phong-dat", [ChiTietThuePhongController::class, "danhSac
 
 Route::group(['middleware' => 'khachHangMiddle'], function() {
     Route::post('/khach-hang-dat-phong', [HoaDonController::class, 'datPhong']);
+    Route::get('khach-hang/hoa-don/data', [HoaDonController::class, 'getDataKhachHang']);
+    Route::post('khach-hang/hoa-don/chi-tiet-thue', [HoaDonController::class, 'chiTietThueKhachHang']);
+    Route::post('khach-hang/hoa-don/tim-kiem', [HoaDonController::class, 'timKiemKhachHang']);
 });
 
 Route::post("/khach-hang/dat-lai-mat-khau", [KhachHangController::class, 'datLaiMatKhau']);

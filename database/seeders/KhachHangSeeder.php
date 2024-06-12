@@ -23,6 +23,7 @@ class KhachHangSeeder extends Seeder
                 'so_dien_thoai' =>  '0708585120',
                 'password'      =>  bcrypt('123456'),
                 'ngay_sinh'     =>  '2005-01-01',
+                'is_active'     =>  1,
             ],
             [
                 'ho_lot'        => 'Nguyễn Văn',
@@ -31,6 +32,8 @@ class KhachHangSeeder extends Seeder
                 'so_dien_thoai' => '0708585121',
                 'password'      => bcrypt('123456'),
                 'ngay_sinh'     => '1980-02-15',
+                'is_active'     =>  1,
+
             ],
             [
                 'ho_lot'        => 'Trần Bình',
@@ -39,6 +42,8 @@ class KhachHangSeeder extends Seeder
                 'so_dien_thoai' => '0708585122',
                 'password'      => bcrypt('123456'),
                 'ngay_sinh'     => '1990-03-20',
+                'is_active'     =>  1,
+
             ],
             [
                 'ho_lot'        => 'Lê Thị',
@@ -47,6 +52,8 @@ class KhachHangSeeder extends Seeder
                 'so_dien_thoai' => '0708585123',
                 'password'      => bcrypt('123456'),
                 'ngay_sinh'     => '1985-04-10',
+                'is_active'     =>  1,
+
             ],
             [
                 'ho_lot'        => 'Phạm Hoàng',
@@ -55,6 +62,8 @@ class KhachHangSeeder extends Seeder
                 'so_dien_thoai' => '0708585124',
                 'password'      => bcrypt('123456'),
                 'ngay_sinh'     => '1975-05-30',
+                'is_active'     =>  1,
+
             ],
             [
                 'ho_lot'        => 'Trịnh Văn',
@@ -63,6 +72,8 @@ class KhachHangSeeder extends Seeder
                 'so_dien_thoai' => '0708585125',
                 'password'      => bcrypt('123456'),
                 'ngay_sinh'     => '1995-06-25',
+                'is_active'     =>  1,
+
             ],
         ]);
     }

@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             PhanQuyenSeeder::class,
             KhachHangSeeder::class,
             ChiTietPhanQuyenSeeder::class,
+            ChuyenMucSeeder::class,
         ]);
     }
 }
