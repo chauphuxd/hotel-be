@@ -474,9 +474,9 @@
                                                                 <td align="center"
                                                                     style="padding:0;Margin:0;padding-top:10px;padding-bottom:10px;font-size:0px">
                                                                     <a target="_blank"
-                                                                        href="https://dzfullstack.com/assets/images/logo-img.png"
+                                                                        href="https://png.pngtree.com/png-clipart/20230207/original/pngtree-beauty-logo-design-png-image_8947095.png"
                                                                         style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#5C68E2;font-size:14px"><img
-                                                                            src="https://dzfullstack.com/assets/images/logo-img.png"
+                                                                            src="https://png.pngtree.com/png-clipart/20230207/original/pngtree-beauty-logo-design-png-image_8947095.png"
                                                                             alt
                                                                             style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"
                                                                             width="100"></a></td>

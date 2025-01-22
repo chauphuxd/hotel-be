@@ -121,7 +121,7 @@ class HoaDonController extends Controller
 
         return response()->json([
             'status'    =>  true,
-            'message'   =>  'Đã đặt phòng thành công!',
+            'message'   =>  'Đã đặt phòng thành công, vui lòng kiểm tra Email!',
         ]);
     }
 

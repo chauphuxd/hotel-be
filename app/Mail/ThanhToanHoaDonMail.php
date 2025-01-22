@@ -24,7 +24,7 @@ class ThanhToanHoaDonMail extends Mailable
 
     public function build()
     {
-        return $this->subject("Thanh toán hóa đơn của DZFullStack 17")
+        return $this->subject("Thanh toán hóa đơn của ALOHA")
                     ->view('mail_thanh_toan_don_hang', ['bien_1' => $this->bien_1, 'data' => $this->data]);
     }
 }
